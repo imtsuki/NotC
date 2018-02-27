@@ -36,6 +36,14 @@ namespace C
             ID,
         }
 
+        public enum StateNumber
+        {
+            START,
+            FINISH,
+            FAILED,
+            D,
+        }
+
         public LexicalScanner(String source)
         {
             this.Source = source;
@@ -409,7 +417,40 @@ namespace C
         private Token GetNumber()
         {
             Char c;
-            return new TokenInt(0);
+            StateNumber state = StateNumber.START;
+            Int64 number = 0;
+            Int32 digit;
+            while (true)
+            {
+                switch (state)
+                {
+                    case StateNumber.START:
+                        c = NextChar();
+                        digit = Convert.ToInt32(c) - 0x30;
+                        number *= 10;
+                        number += digit;
+                        state = StateNumber.D;
+                        break;
+                    case StateNumber.D:
+                        c = NextChar();
+                        if (Char.IsDigit(c))
+                        {
+                            digit = Convert.ToInt32(c) - 0x30;
+                            
+                            number *= 10;
+                            number += digit;
+                            state = StateNumber.D;
+                        }
+                        else
+                        {
+                            Retract();
+                            state = StateNumber.FINISH;
+                        }
+                        break;
+                    case StateNumber.FINISH:
+                        return new TokenInt(val: number);
+                }
+            }
         }
 
         private Token GetChar()
