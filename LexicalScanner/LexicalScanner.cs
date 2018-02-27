@@ -408,6 +408,7 @@ namespace C
 
         private Token GetNumber()
         {
+            Char c;
             return new TokenInt(0);
         }
 

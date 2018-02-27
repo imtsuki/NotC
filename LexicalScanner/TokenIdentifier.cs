@@ -12,7 +12,7 @@ namespace C
         public String Val { get; }
         public override string ToString()
         {
-            return this.Kind + ": " + this.Val;
+            return $"{this.Kind}: [{this.Val}]";
         }
     }
 }
