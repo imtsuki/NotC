@@ -48,7 +48,7 @@ namespace C
 
             while (true)
             {
-                while (blanks.Contains(Source[lexemeBegin]) && lexemeBegin < Source.Length) lexemeBegin++;
+                while (lexemeBegin < Source.Length && blanks.Contains(Source[lexemeBegin])) lexemeBegin++;
                 if (lexemeBegin == Source.Length) break;
                 forward = lexemeBegin - 1;
 
@@ -370,7 +370,40 @@ namespace C
 
         private Token GetIdentifier()
         {
-            return new TokenIdentifier("identifier/keyword");
+            StateIdentifier state = StateIdentifier.START;
+            String identifier = "";
+            Char c;
+            HashSet<Char> legalChars = new HashSet<Char>("_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            while (true)
+            {
+                switch (state)
+                {
+                    case StateIdentifier.START:
+                        c = NextChar();
+                        identifier += c;
+                        state = StateIdentifier.ID;
+                        break;
+                    case StateIdentifier.ID:
+                        c = NextChar();
+                        if (legalChars.Contains(c))
+                        {
+                            identifier += c;
+                            state = StateIdentifier.ID;
+                        }
+                        else
+                        {
+                            Retract();
+                            state = StateIdentifier.FINISH;
+                        }
+                        break;
+                    case StateIdentifier.FINISH:
+                        if (TokenKeyword.Keywords.ContainsKey(identifier))
+                            return new TokenKeyword(val: TokenKeyword.Keywords[identifier]);
+                        else
+                            return new TokenIdentifier(val: identifier);
+                }
+            }
+            
         }
 
         private Token GetNumber()
