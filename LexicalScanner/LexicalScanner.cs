@@ -477,7 +477,6 @@ namespace C
             var invalidChars = new HashSet<Char>("\'\n");
             string escapeChars = @"abfnrtv'""\";
             string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
-            bool CheckCharClosureValid() => NextChar() == '\'';
             TokenChar result = null;
             while (true)
             {

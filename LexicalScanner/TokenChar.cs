@@ -6,10 +6,7 @@ namespace C
 {
     class TokenChar : Token
     {
-        public TokenChar(Char val)
-        {
-            this.Val = val;
-        }
+        public TokenChar(Char val) => this.Val = val;
 
         public override TokenKind Kind { get; } = TokenKind.CHAR;
         public Char Val { get; }

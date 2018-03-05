@@ -40,10 +40,7 @@ namespace C
     }
     public class TokenKeyword : Token
     {
-        public TokenKeyword(KeywordVal val)
-        {
-            this.Val = val;
-        }
+        public TokenKeyword(KeywordVal val) => this.Val = val;
         public override TokenKind Kind { get; } = TokenKind.KEYWORD;
         public KeywordVal Val { get; }
         public static Dictionary<String, KeywordVal> Keywords { get; } = new Dictionary<string, KeywordVal>()
@@ -81,9 +78,6 @@ namespace C
             { "static",      KeywordVal.STATIC    },
             { "while",       KeywordVal.WHILE     }
         };
-        public override String ToString()
-        {
-            return $"{this.Kind}: {this.Val}";
-        }
+        public override String ToString() => $"{this.Kind}: {this.Val}";
     }
 }
