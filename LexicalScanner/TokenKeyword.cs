@@ -83,7 +83,7 @@ namespace C
         };
         public override String ToString()
         {
-            return this.Kind + ": " + this.Val;
+            return $"{this.Kind}: {this.Val}";
         }
     }
 }
