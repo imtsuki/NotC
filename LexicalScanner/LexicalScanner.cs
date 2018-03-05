@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace C
@@ -42,6 +43,21 @@ namespace C
             FINISH,
             FAILED,
             D,
+        }
+
+        public enum StateChar
+        {
+            START,
+            FINISH,
+            FAILED,
+            C,
+            S,
+            SO,
+            SOO,
+            SOOO,
+            SX,
+            SXH,
+            SXHH,
         }
 
         public LexicalScanner(String source)
@@ -455,7 +471,69 @@ namespace C
 
         private Token GetChar()
         {
-            return new TokenChar('c');
+            StateChar state = StateChar.START;
+            Char c = '\0';
+            NextChar();
+            var invalidChars = new HashSet<Char>("\'\n");
+            string escapeChars = @"abfnrtv'""\";
+            string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
+            bool CheckCharClosureValid() => NextChar() == '\'';
+            TokenChar result = null;
+            while (true)
+            {
+                switch (state)
+                {
+                    case StateChar.START:
+                        c = NextChar();
+                        switch (c)
+                        {
+                            case '\\':
+                                state = StateChar.S;
+                                break;
+                            default:
+                                if (invalidChars.Contains(c))
+                                {
+                                    state = StateChar.FAILED;
+                                }
+                                else
+                                {
+                                    state = StateChar.C;
+                                }
+                                break;
+                        }
+                        
+                        break;
+                    case StateChar.C:
+                        result = new TokenChar(val: c);
+                        c = NextChar();
+                        if (c == '\'')
+                        {
+                            state = StateChar.FINISH;
+                        }
+                        else
+                        {
+                            state = StateChar.FAILED;
+                        }
+                        break;
+                    case StateChar.S:
+                        c = NextChar();
+                        if (escapeChars.Contains(c))
+                        {
+                            c = correspondingEscapeChars[escapeChars.IndexOf(c)];
+                            state = StateChar.C;
+                        }
+                        else
+                        {
+                            state = StateChar.FAILED;
+                        }
+                        break;
+                    case StateChar.FINISH:
+                        return result;
+                    case StateChar.FAILED:
+                        throw new Exception();
+
+                }
+            }
         }
 
         private Token GetString()

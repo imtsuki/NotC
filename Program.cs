@@ -9,7 +9,8 @@ namespace C
             String sourceCode = @"char num[20];
 char stack[20];
 char *p = stack;
-int rnum = 0;
+int rnum = '0';
+char a = '\n';
 void push(char n) {
     *p = n;
     p++;
