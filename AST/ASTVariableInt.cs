@@ -4,7 +4,7 @@ using System.Text;
 
 namespace C.AST
 {
-    public class ASTInt : ASTExpression
+    class ASTVariableInt : ASTExpression
     {
     }
 }
