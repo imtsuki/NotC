@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace C
+namespace C.Tokenizer
 {
     public class TokenIdentifier : Token
     {

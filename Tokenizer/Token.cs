@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace C
+namespace C.Tokenizer
 {
     public enum TokenKind
     {

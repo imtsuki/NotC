@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace C
+namespace C.Tokenizer
 {
     public enum KeywordVal
     {

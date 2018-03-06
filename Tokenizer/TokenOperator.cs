@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace C
+namespace C.Tokenizer
 {
     public enum OperatorVal
     {

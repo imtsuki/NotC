@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using C.Tokenizer;
 namespace C
 {
     class Program
@@ -7,9 +8,9 @@ namespace C
         static void Main(string[] args)
         {
             Console.WriteLine("-------Viva la Vida!-------");
-            //Test LexicalScanner
+            //Test Tokenizer
             String sourceCode = System.IO.File.ReadAllText("./TestCode/lex.c.txt");
-            LexicalScanner scanner = new LexicalScanner(sourceCode);
+            Scanner scanner = new Scanner(sourceCode);
             IEnumerable<Token> tokens = scanner.Lex();
             Console.WriteLine("-----------Source----------");
             Console.WriteLine();

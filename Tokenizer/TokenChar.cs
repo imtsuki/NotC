@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace C
+namespace C.Tokenizer
 {
-    class TokenChar : Token
+    public class TokenChar : Token
     {
         public TokenChar(Char val) => this.Val = val;
 

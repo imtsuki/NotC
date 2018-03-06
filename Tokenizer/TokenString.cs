@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace C
+namespace C.Tokenizer
 {
-    class TokenString : Token
+    public class TokenString : Token
     {
         public TokenString(String val)
         {

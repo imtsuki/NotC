@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace C
+namespace C.Tokenizer
 {
-    class TokenInt : Token
+    public class TokenInt : Token
     {
         public TokenInt(Int64 val) => this.Val = val;
         public override TokenKind Kind { get; } = TokenKind.INT;

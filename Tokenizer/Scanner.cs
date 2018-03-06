@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace C
+namespace C.Tokenizer
 {
-    public class LexicalScanner
+    public class Scanner
     {
-
         public enum StateOperator
         {
             START,
@@ -70,7 +69,7 @@ namespace C
             QQ,
         }
 
-        public LexicalScanner(String source)
+        public Scanner(String source)
         {
             this.Source = source;
 
