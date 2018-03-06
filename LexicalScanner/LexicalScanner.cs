@@ -60,6 +60,16 @@ namespace C
             SXHH,
         }
 
+        public enum StateString
+        {
+            START,
+            FINISH,
+            FAILED,
+            L,
+            Q,
+            QQ,
+        }
+
         public LexicalScanner(String source)
         {
             this.Source = source;
@@ -537,6 +547,20 @@ namespace C
 
         private Token GetString()
         {
+            //TODO
+            StateString state = StateString.START;
+            Char c;
+            NextChar();
+            var invalidChars = new HashSet<Char>("\'\n");
+            string escapeChars = @"abfnrtv'""\";
+            string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
+            TokenChar result = null;
+            while (true)
+            {
+                switch (state)
+                {
+                }
+            }
             return new TokenString("string");
         }
 
