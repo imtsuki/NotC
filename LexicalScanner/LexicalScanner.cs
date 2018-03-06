@@ -550,17 +550,6 @@ namespace C
             //TODO
             StateString state = StateString.START;
             Char c;
-            NextChar();
-            var invalidChars = new HashSet<Char>("\'\n");
-            string escapeChars = @"abfnrtv'""\";
-            string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
-            TokenChar result = null;
-            while (true)
-            {
-                switch (state)
-                {
-                }
-            }
             return new TokenString("string");
         }
 

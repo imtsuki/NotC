@@ -1,0 +1,23 @@
+﻿int main() {
+	int a = 12345;
+	char b = 'b';
+	char c = '\n';
+	long d, e, f;
+	d = e + f;
+	f *= e;
+	a >>= d;
+	for (int i = 0; i != 3; i++) {
+		while (false) {
+			int array[234][222];
+		}
+		if (true) {
+			switch (i) {
+			case 1:
+				continue;
+			default:
+				break;
+			}
+		}
+	}
+	return 0;
+}
