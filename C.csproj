@@ -7,8 +7,4 @@
     <AssemblyName>C</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Parser\" />
-  </ItemGroup>
-
 </Project>
