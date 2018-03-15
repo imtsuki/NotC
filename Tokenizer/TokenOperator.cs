@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : C
-// Author           : super
+// Author           : Jason Qiu
 // Created          : 03-06-2018
 //
-// Last Modified By : super
-// Last Modified On : 03-06-2018
+// Last Modified By : Jason Qiu
+// Last Modified On : 03-15-2018
 // ***********************************************************************
 // <copyright file="TokenOperator.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -23,183 +23,183 @@ namespace C.Tokenizer
     public enum OperatorVal
     {
         /// <summary>
-        /// Represets '['. 
+        /// Represents '['. 
         /// </summary>
         LBRACKET,
         /// <summary>
-        /// Represets ']'. 
+        /// Represents ']'. 
         /// </summary>
         RBRACKET,
         /// <summary>
-        /// Represets '('. 
+        /// Represents '('. 
         /// </summary>
         LPAREN,
         /// <summary>
-        /// Represets ')'. 
+        /// Represents ')'. 
         /// </summary>
         RPAREN,
         /// <summary>
-        /// Represets '.'. 
+        /// Represents '.'. 
         /// </summary>
         PERIOD,
         /// <summary>
-        /// Represets ','. 
+        /// Represents ','. 
         /// </summary>
         COMMA,
         /// <summary>
-        /// Represets '?'. 
+        /// Represents '?'. 
         /// </summary>
         QUESTION,
         /// <summary>
-        /// Represets ':'. 
+        /// Represents ':'. 
         /// </summary>
         COLON,
         /// <summary>
-        /// Represets '~'. 
+        /// Represents '~'. 
         /// </summary>
         TILDE,
         /// <summary>
-        /// Represets '-'. 
+        /// Represents '-'. 
         /// </summary>
         SUB,
         /// <summary>
-        /// The rarrow
+        /// Represents '->'.
         /// </summary>
         RARROW,
         /// <summary>
-        /// The decimal
+        /// Represents '--'.
         /// </summary>
         DEC,
         /// <summary>
-        /// The subassign
+        /// Represents '-='.
         /// </summary>
         SUBASSIGN,
         /// <summary>
-        /// Represets '+'. 
+        /// Represents '+'. 
         /// </summary>
         ADD,
         /// <summary>
-        /// The inc
+        /// Represents '++'.
         /// </summary>
         INC,
         /// <summary>
-        /// The addassign
+        /// Represents '+='.
         /// </summary>
         ADDASSIGN,
         /// <summary>
-        /// The bitand
+        /// Represents '&'.
         /// </summary>
         BITAND,
         /// <summary>
-        /// The and
+        /// Represents '&&'.
         /// </summary>
         AND,
         /// <summary>
-        /// The andassign
+        /// Represents '&='.
         /// </summary>
         ANDASSIGN,
         /// <summary>
-        /// The mult
+        /// Represents '*'.
         /// </summary>
         MULT,
         /// <summary>
-        /// The multassign
+        /// Represents '*='.
         /// </summary>
         MULTASSIGN,
         /// <summary>
-        /// The lt
+        /// Represents '<'.
         /// </summary>
         LT,
         /// <summary>
-        /// The leq
+        /// Represents '<='.
         /// </summary>
         LEQ,
         /// <summary>
-        /// The lshift
+        /// Represents '<<'.
         /// </summary>
         LSHIFT,
         /// <summary>
-        /// The lshiftassign
+        /// Represents '<<='.
         /// </summary>
         LSHIFTASSIGN,
         /// <summary>
-        /// The gt
+        /// Represents '>'.
         /// </summary>
         GT,
         /// <summary>
-        /// The geq
+        /// Represents '>='.
         /// </summary>
         GEQ,
         /// <summary>
-        /// The rshift
+        /// Represents '>>'.
         /// </summary>
         RSHIFT,
         /// <summary>
-        /// The rshiftassign
+        /// Represents '>>='.
         /// </summary>
         RSHIFTASSIGN,
         /// <summary>
-        /// The assign
+        /// Represents '='.
         /// </summary>
         ASSIGN,
         /// <summary>
-        /// Represets '=='.
+        /// Represents '=='.
         /// </summary>
         EQ,
         /// <summary>
-        /// Represets '|'.
+        /// Represents '|'.
         /// </summary>
         BITOR,
         /// <summary>
-        /// Represets '||'.
+        /// Represents '||'.
         /// </summary>
         OR,
         /// <summary>
-        /// Represets '|='.
+        /// Represents '|='.
         /// </summary>
         ORASSIGN,
         /// <summary>
-        /// Represets '!'.
+        /// Represents '!'.
         /// </summary>
         NOT,
         /// <summary>
-        /// Represets '!='.
+        /// Represents '!='.
         /// </summary>
         NEQ,
         /// <summary>
-        /// Represets '/'.
+        /// Represents '/'.
         /// </summary>
         DIV,
         /// <summary>
-        /// Represets '/='.
+        /// Represents '/='.
         /// </summary>
         DIVASSIGN,
         /// <summary>
-        /// Represets '%'.
+        /// Represents '%'.
         /// </summary>
         MOD,
         /// <summary>
-        /// Represets '%='.
+        /// Represents '%='.
         /// </summary>
         MODASSIGN,
         /// <summary>
-        /// The xor
+        /// Represents '^'.
         /// </summary>
         XOR,
         /// <summary>
-        /// Represets '^='.
+        /// Represents '^='.
         /// </summary>
         XORASSIGN,
         /// <summary>
-        /// The semicolon
+        /// Represents ';'.
         /// </summary>
         SEMICOLON,
         /// <summary>
-        /// Represets '{'. 
+        /// Represents '{'. 
         /// </summary>
         LCURL,
         /// <summary>
-        /// Represets '}'. 
+        /// Represents '}'. 
         /// </summary>
         RCURL
     }
