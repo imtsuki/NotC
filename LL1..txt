@@ -1,0 +1,39 @@
+﻿<expression> ->
+	 assignment_expression
+	|expression ',' assignment_expression
+Exp -> Exp ASSIGNOP Exp {Generate Node}
+	|  Exp PLUS Exp {Generate Node}
+	|  Exp MINUS Exp {Generate Node}
+	|  Exp STAR Exp {Generate Node}
+	|  Exp DIV Exp {Generate Node}
+	|  LP Exp RP {Generate Node}
+	|  MINUS Exp {Generate Node}
+	|  ID {Generate Node}
+	|  INT {Generate Node}
+(消除左递归)
+Exp -> LP Exp RP {Generate Node} Rest        (1)
+	|  MINUS Exp {Generate Node} Rest        (2)
+	|  ID {Generate Node} Rest               (3)
+	|  INT {Generate Node} Rest              (4)
+Rest -> ASSIGNOP Exp Rest       (5)
+	|  PLUS Exp Rest         (6)
+	|  MINUS Exp Rest       (7)
+	|  STAR Exp Rest        (8)
+	|  DIV Exp Rest          (9)
+	|  EMPTY              (10)
+
+FIRST(Exp) = { LP, MINUS, ID, INT }
+FIRST(E) = { ASSIGOP, PLUS, MINUS, STAR, DIV, EMPTY }
+FOLLOW(EXP) = {  }
+FOLLOW(E) = {  }
+    |  LP  | MINUS | ID | INT | ASSIGNOP | PLUS |  STAR | DIV | EMPTY  
+Exp |  1   |   2   |  3 |  4  |          |      |       |     |  
+E   |      |   7   |    |     |    5     |  6   |   8   |  9  |  10
+
+//Factor -> INT | ID | (Expr)
+
+Expr -> INT Rest
+Rest -> + INT {+.ToString()} Rest
+	  | - INT {-.ToString()} Rest
+	  | EMPTY
+INT  -> {INT.ToString()}

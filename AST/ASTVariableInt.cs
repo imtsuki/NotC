@@ -21,7 +21,7 @@ namespace C.AST
     /// Class ASTVariableInt.
     /// </summary>
     /// <seealso cref="C.AST.ASTExpression" />
-    class ASTVariableInt : ASTExpression
+    public class ASTVariableInt : ASTExpression
     {
     }
 }

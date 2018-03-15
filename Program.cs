@@ -19,19 +19,19 @@ namespace C
     /// <summary>
     /// Class Program.
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("-------Viva la Vida!-------");
             //Test Tokenizer
-            String sourceCode = System.IO.File.ReadAllText("./TestCode/lex.c.txt");
+            String sourceCode = System.IO.File.ReadAllText("./TestCode/expr1.c.txt");
             Scanner scanner = new Scanner(sourceCode);
-            IEnumerable<Token> tokens = scanner.Lex();
+            IList<Token> tokens = scanner.Lex();
             Console.WriteLine("-----------Source----------");
             Console.WriteLine();
             Console.WriteLine(sourceCode);
@@ -45,6 +45,8 @@ namespace C
             Console.WriteLine();
             Console.WriteLine("-------End of Tokens-------");
             Console.WriteLine("-------Viva la Vida!-------");
+            var parser = new Parser.CParser(tokens);
+            parser.Expr();
             Console.ReadKey();
         }
     }

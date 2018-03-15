@@ -23,43 +23,43 @@ namespace C.Tokenizer
     public enum OperatorVal
     {
         /// <summary>
-        /// The lbracket
+        /// Represets '['. 
         /// </summary>
         LBRACKET,
         /// <summary>
-        /// The rbracket
+        /// Represets ']'. 
         /// </summary>
         RBRACKET,
         /// <summary>
-        /// The lparen
+        /// Represets '('. 
         /// </summary>
         LPAREN,
         /// <summary>
-        /// The rparen
+        /// Represets ')'. 
         /// </summary>
         RPAREN,
         /// <summary>
-        /// The period
+        /// Represets '.'. 
         /// </summary>
         PERIOD,
         /// <summary>
-        /// The comma
+        /// Represets ','. 
         /// </summary>
         COMMA,
         /// <summary>
-        /// The question
+        /// Represets '?'. 
         /// </summary>
         QUESTION,
         /// <summary>
-        /// The colon
+        /// Represets ':'. 
         /// </summary>
         COLON,
         /// <summary>
-        /// The tilde
+        /// Represets '~'. 
         /// </summary>
         TILDE,
         /// <summary>
-        /// The sub
+        /// Represets '-'. 
         /// </summary>
         SUB,
         /// <summary>
@@ -75,7 +75,7 @@ namespace C.Tokenizer
         /// </summary>
         SUBASSIGN,
         /// <summary>
-        /// The add
+        /// Represets '+'. 
         /// </summary>
         ADD,
         /// <summary>
@@ -143,43 +143,43 @@ namespace C.Tokenizer
         /// </summary>
         ASSIGN,
         /// <summary>
-        /// The eq
+        /// Represets '=='.
         /// </summary>
         EQ,
         /// <summary>
-        /// The bitor
+        /// Represets '|'.
         /// </summary>
         BITOR,
         /// <summary>
-        /// The or
+        /// Represets '||'.
         /// </summary>
         OR,
         /// <summary>
-        /// The orassign
+        /// Represets '|='.
         /// </summary>
         ORASSIGN,
         /// <summary>
-        /// The not
+        /// Represets '!'.
         /// </summary>
         NOT,
         /// <summary>
-        /// The neq
+        /// Represets '!='.
         /// </summary>
         NEQ,
         /// <summary>
-        /// The div
+        /// Represets '/'.
         /// </summary>
         DIV,
         /// <summary>
-        /// The divassign
+        /// Represets '/='.
         /// </summary>
         DIVASSIGN,
         /// <summary>
-        /// The mod
+        /// Represets '%'.
         /// </summary>
         MOD,
         /// <summary>
-        /// The modassign
+        /// Represets '%='.
         /// </summary>
         MODASSIGN,
         /// <summary>
@@ -187,7 +187,7 @@ namespace C.Tokenizer
         /// </summary>
         XOR,
         /// <summary>
-        /// The xorassign
+        /// Represets '^='.
         /// </summary>
         XORASSIGN,
         /// <summary>
@@ -195,11 +195,11 @@ namespace C.Tokenizer
         /// </summary>
         SEMICOLON,
         /// <summary>
-        /// The lcurl
+        /// Represets '{'. 
         /// </summary>
         LCURL,
         /// <summary>
-        /// The rcurl
+        /// Represets '}'. 
         /// </summary>
         RCURL
     }

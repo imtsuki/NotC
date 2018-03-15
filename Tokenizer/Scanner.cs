@@ -240,7 +240,7 @@ namespace C.Tokenizer
         /// Lexes this instance.
         /// </summary>
         /// <returns>IEnumerable&lt;Token&gt;.</returns>
-        public IEnumerable<Token> Lex()
+        public IList<Token> Lex()
         {
             var tokens = new List<Token>();
 
@@ -261,7 +261,7 @@ namespace C.Tokenizer
                 lexemeBegin = forward + 1;
                 if (lexemeBegin == Source.Length) break;
             }
-
+            tokens.Add(new TokenEOF());
             return tokens;
         }
 

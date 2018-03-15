@@ -53,7 +53,11 @@ namespace C.Tokenizer
         /// <summary>
         /// The operator
         /// </summary>
-        OPERATOR
+        OPERATOR,
+        /// <summary>
+        /// The end
+        /// </summary>
+        EOF
     }
 
     /// <summary>

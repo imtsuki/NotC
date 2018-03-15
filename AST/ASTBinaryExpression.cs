@@ -22,7 +22,7 @@ namespace C.AST
     /// Class ASTBinaryExpression.
     /// </summary>
     /// <seealso cref="C.AST.ASTExpression" />
-    class ASTBinaryExpression : ASTExpression
+    public class ASTBinaryExpression : ASTExpression
     {
         /// <summary>
         /// The operator
