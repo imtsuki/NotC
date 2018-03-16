@@ -22,11 +22,6 @@ namespace C
     /// </summary>
     public class Program
     {
-        public static void Tree(Expression e)
-        {
-            
-        }
-
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
@@ -52,7 +47,7 @@ namespace C
             Console.WriteLine("-------End of Tokens-------");
             Console.WriteLine("-------Viva la Vida!-------");
             var parser = new Parser.CParser(tokens);
-            var a = parser.Expr();
+            var a = parser.Parse();
             Console.WriteLine(a.ToString());
             Console.ReadKey();
         }

@@ -28,7 +28,7 @@ namespace C.Parser
         /// </summary>
         private Hashtable symbolTable = new Hashtable(new Tokenizer.TokenIdentifier.Comparer());
         /// <summary>
-        /// Gets or sets the previous.
+        /// Gets or sets the previous <see cref="Environment" />.
         /// </summary>
         /// <value>The previous.</value>
         protected Environment Previous
@@ -47,7 +47,7 @@ namespace C.Parser
         }
 
         /// <summary>
-        /// Puts the specified identifier.
+        /// Generate a new <see cref="Symbol" /> of the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         public void Put(Tokenizer.TokenIdentifier id)
@@ -63,7 +63,7 @@ namespace C.Parser
         }
 
         /// <summary>
-        /// Gets the specified identifier.
+        /// Gets the <see cref="Symbol" /> of the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Symbol.</returns>
@@ -79,6 +79,11 @@ namespace C.Parser
             return null;
         }
 
+        /// <summary>
+        /// Determines whether [contains] [the specified identifier].
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if [contains] [the specified identifier]; otherwise, <c>false</c>.</returns>
         public bool Contains(Tokenizer.TokenIdentifier id)
         {
             return symbolTable.Contains(id);

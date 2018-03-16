@@ -19,28 +19,28 @@ using C.Tokenizer;
 namespace C.AST
 {
     /// <summary>
-    /// Class ASTBinaryExpression.
+    /// Represents a binary expression node in an AST. 
     /// </summary>
     /// <seealso cref="C.AST.Expression" />
     public class BinaryExpression : Expression
     {
         /// <summary>
-        /// The right Expr
+        /// The right element of the expression.
         /// </summary>
         private Expression right;
         /// <summary>
-        /// The left Expr
+        /// The left element of the expression.
         /// </summary>
         private Expression left;
 
 
         /// <summary>
-        /// Gets or sets the LHS.
+        /// Gets or sets the left element of the expression.
         /// </summary>
         /// <value>The LHS.</value>
         public Expression Left { get => left; set => left = value; }
         /// <summary>
-        /// Gets or sets the RHS.
+        /// Gets or sets the right element of the expression.
         /// </summary>
         /// <value>The RHS.</value>
         public Expression Right { get => right; set => right = value; }
@@ -48,8 +48,8 @@ namespace C.AST
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
-        /// <param name="left">The l hs.</param>
-        /// <param name="right">The r hs.</param>
+        /// <param name="left">The left element.</param>
+        /// <param name="right">The right element.</param>
         public BinaryExpression(Expression left, Expression right)
         {
             Left = left;
@@ -57,54 +57,106 @@ namespace C.AST
         }
     }
 
+    /// <summary>
+    /// The specific <see cref="BinaryExpression"/> class of '+'.
+    /// </summary>
+    /// <seealso cref="C.AST.BinaryExpression" />
     public class Add : BinaryExpression
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Add"/> class.
+        /// </summary>
+        /// <param name="left">The left element.</param>
+        /// <param name="right">The right element.</param>
         public Add(Expression left, Expression right) : base(left, right)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"{Left.ToString()} {Right.ToString()} +";
+            return $"({Left.ToString()} + {Right.ToString()})";
         }
     }
 
+    /// <summary>
+    /// The specific <see cref="BinaryExpression"/> class of '-'.
+    /// </summary>
+    /// <seealso cref="C.AST.BinaryExpression" />
     public class Sub : BinaryExpression
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sub"/> class.
+        /// </summary>
+        /// <param name="left">The left element.</param>
+        /// <param name="right">The right element.</param>
         public Sub(Expression left, Expression right) : base(left, right)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"{Left.ToString()} {Right.ToString()} -";
+            return $"({Left.ToString()} - {Right.ToString()})";
         }
     }
+    /// <summary>
+    /// The specific <see cref="BinaryExpression"/> class of '*'.
+    /// </summary>
+    /// <seealso cref="C.AST.BinaryExpression" />
     public class Mult : BinaryExpression
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Mult"/> class.
+        /// </summary>
+        /// <param name="left">The left element.</param>
+        /// <param name="right">The right element.</param>
         public Mult(Expression left, Expression right) : base(left, right)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"{Left.ToString()} {Right.ToString()} *";
+            return $"({Left.ToString()} * {Right.ToString()})";
         }
     }
 
+    /// <summary>
+    /// The specific <see cref="BinaryExpression"/> class of '/'.
+    /// </summary>
+    /// <seealso cref="C.AST.BinaryExpression" />
     public class Div : BinaryExpression
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Div"/> class.
+        /// </summary>
+        /// <param name="left">The left element.</param>
+        /// <param name="right">The right element.</param>
         public Div(Expression left, Expression right) : base(left, right)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"{Left.ToString()} {Right.ToString()} /";
+            return $"({Left.ToString()} / {Right.ToString()})";
         }
     }
 }

@@ -44,12 +44,15 @@ namespace C.Parser
             return Expr();
         }
 
-        Stack<object> s;
-
         /// <summary>
-        /// Exprs this instance.
+        /// Production Expr:
+        /// Expr  -> | Term RestE
+        /// RestE -> | + Term {+} RestE
+		///          | - Term {-} RestE
+		///          | ε
         /// </summary>
-        public Expression Expr()
+        /// <returns>Expression Node.</returns>
+        private Expression Expr()
         {
             Expression parent = Term();
             Expression leftTerm = parent;
@@ -83,10 +86,14 @@ namespace C.Parser
         }
 
         /// <summary>
-        /// Terms this instance.
+        /// Production Term:
+        /// Term  -> | Factor RestT
+        /// RestT -> | * Factor {*} RestT
+        ///          | / Factor {/} RestT
+        ///          | ε
         /// </summary>
-        /// <exception cref="Exception">Syntax Error</exception>
-        public Expression Term()
+        /// <returns>Expression Node.</returns>
+        private Expression Term()
         {
             Expression parent = Factor();
             Expression leftFactor = parent;
@@ -118,7 +125,14 @@ namespace C.Parser
             }
         }
 
-        public Expression Factor()
+        /// <summary>
+        /// Production Factor:
+        /// Factor-> | IntNumber
+        ///          | Id
+        ///          | ( Expr )
+        /// </summary>
+        /// <returns>Expression Node.</returns>
+        private Expression Factor()
         {
             Expression result = null;
             if (Lookahead.Kind == TokenKind.INT)
