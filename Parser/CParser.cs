@@ -72,10 +72,44 @@ namespace C.Parser
         /// <exception cref="Exception">Syntax Error</exception>
         public void Term()
         {
+            Factor();
+            while (true)
+            {
+                switch (Lookahead.Kind)
+                {
+                    case TokenKind.OPERATOR:
+                        switch (((TokenOperator)Lookahead).Val)
+                        {
+                            case OperatorVal.MULT:
+                                Match(OperatorVal.MULT);
+                                Factor();
+                                Console.Write("*");
+                                break;
+                            case OperatorVal.DIV:
+                                Match(OperatorVal.DIV);
+                                Factor();
+                                Console.Write("/");
+                                break;
+                            default:
+                                return;
+                        }
+                        break;
+                }
+            }
+        }
+
+        public void Factor()
+        {
             if (Lookahead.Kind == TokenKind.INT)
             {
                 Console.Write($"[{((TokenInt)Lookahead).Val}]");
                 Match(TokenKind.INT);
+            }
+            else if (Lookahead.Kind == TokenKind.OPERATOR)
+            {
+                Match(OperatorVal.LPAREN);
+                Expr();
+                Match(OperatorVal.RPAREN);
             }
             else
             {
