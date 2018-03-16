@@ -4,7 +4,7 @@
 // Created          : 03-14-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-15-2018
+// Last Modified On : 03-16-2018
 // ***********************************************************************
 // <copyright file="CParser.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Text;
 using C.Tokenizer;
 using C.AST;
+using System.Linq;
 
 namespace C.Parser
 {
@@ -39,79 +40,47 @@ namespace C.Parser
         /// </summary>
         public void Expr()
         {
-            switch (Lookahead.Kind)
+            Term();
+            while (true)
             {
-                case TokenKind.INT:
-                    INT();
-                    Rest();
-                    break;
-                default:
-                    break;
+                switch (Lookahead.Kind)
+                {
+                    case TokenKind.OPERATOR:
+                        switch (((TokenOperator)Lookahead).Val)
+                        {
+                            case OperatorVal.ADD:
+                                Match(OperatorVal.ADD);
+                                Term();
+                                Console.Write("+");
+                                break;
+                            case OperatorVal.SUB:
+                                Match(OperatorVal.SUB);
+                                Term();
+                                Console.Write("-");
+                                break;
+                            default:
+                                return;
+                        }
+                        break;
+                }
             }
         }
 
         /// <summary>
-        /// Ints this instance.
+        /// Terms this instance.
         /// </summary>
-        /// <exception cref="Exception">INT not matched</exception>
-        public void INT()
+        /// <exception cref="Exception">Syntax Error</exception>
+        public void Term()
         {
             if (Lookahead.Kind == TokenKind.INT)
             {
                 Console.Write($"[{((TokenInt)Lookahead).Val}]");
-                Lookahead = NextTerminal();
+                Match(TokenKind.INT);
             }
             else
             {
-                throw new Exception("INT not matched");
+                throw new Exception("Syntax Error");
             }
-            
-        }
-
-        /// <summary>
-        /// Rests this instance.
-        /// </summary>
-        public void Rest()
-        {
-            switch (Lookahead.Kind)
-            {
-                case TokenKind.OPERATOR:
-                    switch (((TokenOperator)Lookahead).Val)
-                    {
-                        case OperatorVal.ADD:
-                            ADD();
-                            INT();
-                            Console.Write("+");
-                            Rest();
-                            break;
-                        case OperatorVal.SUB:
-                            SUB();
-                            INT();
-                            Console.Write("-");
-                            Rest();
-                            break;
-                        default:
-                            break;
-
-                    }
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Adds this instance.
-        /// </summary>
-        public void ADD()
-        {
-            Lookahead = NextTerminal();
-        }
-
-        /// <summary>
-        /// Subs this instance.
-        /// </summary>
-        public void SUB()
-        {
-            Lookahead = NextTerminal();
         }
 
         /// <summary>
@@ -129,13 +98,61 @@ namespace C.Parser
         private Token Lookahead;
 
         /// <summary>
-        /// Nexts the terminal.
+        /// Returns the next terminal.
         /// </summary>
-        /// <returns>Token.</returns>
+        /// <returns>Next terminal.</returns>
         Token NextTerminal()
         {
             lookaheadPosition++;
             return Tokens[lookaheadPosition];
+            
+        }
+
+        /// <summary>
+        /// Matches the specified terminal.
+        /// </summary>
+        /// <param name="term">The terminal.</param>
+        /// <exception cref="Exception">
+        /// </exception>
+        private void Match(object term)
+        {
+            
+            if (term.GetType().Equals(typeof(KeywordVal)))
+            {
+                if (Lookahead.Kind == TokenKind.KEYWORD 
+                    && ((TokenKeyword)Lookahead).Val == (KeywordVal)term)
+                {
+                    Lookahead = NextTerminal();
+                }
+                else
+                {
+                    throw new Exception($"{term} Not Matched");
+                }
+            }
+            else if (term.GetType().Equals(typeof(OperatorVal)))
+            {
+                if (Lookahead.Kind == TokenKind.OPERATOR
+                    && ((TokenOperator)Lookahead).Val == (OperatorVal)term)
+                {
+                    Lookahead = NextTerminal();
+                }
+                else
+                {
+                    throw new Exception($"{term} Not Matched");
+                }
+            }
+            else if (term.GetType().Equals(typeof(TokenKind)))
+            {
+                if (Lookahead.Kind == (TokenKind)term)
+                {
+                    Lookahead = NextTerminal();
+                }
+                else
+                {
+                    throw new Exception($"{term} Not Matched");
+                }
+            }
+
         }
         
     }

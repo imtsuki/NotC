@@ -37,3 +37,24 @@ Rest -> + INT {+.ToString()} Rest
 	  | - INT {-.ToString()} Rest
 	  | EMPTY
 INT  -> {INT.ToString()}
+//****************************
+Expr -> Expr + Term {+}
+	  | Expr - Term {-}
+	  | Term
+Term -> Term * Factor {*}
+	  | Term / Factor {/}
+	  | Factor
+Factor-> INT        {INT}
+		| (Expr)
+
+Expr  -> | Term RestE
+RestE -> | + Term {+} RestE
+		 | - Term {-} RestE
+		 | EMPTY
+Term  -> | Factor RestT
+RestT -> | * Factor {*} RestT
+	     | / Factor {/} RestT
+		 | EMPTY
+Factor-> | INT {INT}
+	     | ( Expr )
+
