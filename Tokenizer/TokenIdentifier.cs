@@ -12,15 +12,31 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
+using System.Collections;
 
 namespace C.Tokenizer
 {
+    
+
     /// <summary>
     /// Class TokenIdentifier.
     /// </summary>
     /// <seealso cref="C.Tokenizer.Token" />
     public class TokenIdentifier : Token
     {
+        public class Comparer : IEqualityComparer
+        {
+            public new bool Equals(object x, object y)
+            {
+                return ((TokenIdentifier)x).Val.Equals(((TokenIdentifier)y).Val);
+            }
+
+            public int GetHashCode(object obj)
+            {
+                return ((TokenIdentifier)obj).Val.GetHashCode();
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenIdentifier"/> class.
         /// </summary>

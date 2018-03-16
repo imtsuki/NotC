@@ -59,3 +59,20 @@ Factor-> | INT {INT}
 	     | ( Expr )
 1 - 2 + 3 - (4 * 5 - 1)
 5 + ((1 + 2) * 4) − 3
+
+// env case 1
+int i;
+{
+	{
+		int i;
+	}
+	int i;
+}
+//env case 2
+int i = 0;
+{
+	i = 10;
+	int i;
+	i = 20;
+}
+now i = 10.

@@ -36,6 +36,15 @@ namespace C.Parser
         }
 
         /// <summary>
+        /// Parses the given Tokens to its AST representation.
+        /// </summary>
+        /// <returns>The root node of the given Tokens' AST.</returns>
+        public ASTExpression Parse()
+        {
+            return new ASTExpression();
+        }
+
+        /// <summary>
         /// Exprs this instance.
         /// </summary>
         public void Expr()
@@ -105,6 +114,11 @@ namespace C.Parser
                 Console.Write($"[{((TokenInt)Lookahead).Val}]");
                 Match(TokenKind.INT);
             }
+            else if (Lookahead.Kind == TokenKind.IDENTIFIER)
+            {
+                Console.Write($"[{((TokenIdentifier)Lookahead).Val}]");
+                Match(TokenKind.IDENTIFIER);
+            }
             else if (Lookahead.Kind == TokenKind.OPERATOR)
             {
                 Match(OperatorVal.LPAREN);
@@ -132,10 +146,15 @@ namespace C.Parser
         private Token Lookahead;
 
         /// <summary>
+        /// The current environment
+        /// </summary>
+        private Environment CurrentEnvironment = new Environment(previous: null);
+
+        /// <summary>
         /// Returns the next terminal.
         /// </summary>
         /// <returns>Next terminal.</returns>
-        Token NextTerminal()
+        private Token NextTerminal()
         {
             lookaheadPosition++;
             return Tokens[lookaheadPosition];
@@ -186,8 +205,6 @@ namespace C.Parser
                     throw new Exception($"{term} Not Matched");
                 }
             }
-
-        }
-        
+        }  
     }
 }
