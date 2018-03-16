@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using C.Tokenizer;
+using C.AST;
 namespace C
 {
     /// <summary>
@@ -21,6 +22,11 @@ namespace C
     /// </summary>
     public class Program
     {
+        public static void Tree(Expression e)
+        {
+            
+        }
+
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
@@ -46,14 +52,8 @@ namespace C
             Console.WriteLine("-------End of Tokens-------");
             Console.WriteLine("-------Viva la Vida!-------");
             var parser = new Parser.CParser(tokens);
-            parser.Expr();
-            var env = new Parser.Environment(null);
-            var table = new System.Collections.Hashtable();
-            table.Add(1, new Parser.Symbol(1234));
-            table.Add(2, table[1]);
-            ((Parser.Symbol)table[1]).i = 1;
-            Console.WriteLine(((Parser.Symbol)table[1]).i);
-            Console.WriteLine(((Parser.Symbol)table[2]).i);
+            var a = parser.Expr();
+            Console.WriteLine(a.ToString());
             Console.ReadKey();
         }
     }

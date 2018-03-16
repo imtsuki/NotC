@@ -76,3 +76,15 @@ int i = 0;
 	i = 20;
 }
 now i = 10.
+
+Program -> Block
+Block   -> { Stmts }
+Stmts   -> Stmts Stmt | EMPTY
+Stmt    -> Type Id ;
+         | Id = Expr ;
+		 | if (Expr) Stmt
+		 | if (Expr) Stmt else Stmt
+		 | while (Expr) Stmt
+		 | do Stmt while (Expr)
+		 | break ;
+		 | Block

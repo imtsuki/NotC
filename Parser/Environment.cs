@@ -54,11 +54,11 @@ namespace C.Parser
         {
             if (!this.Contains(id))
             {
-                symbolTable.Add(id, 1);
+                symbolTable.Add(id, new Symbol());
             }
             else
             {
-                throw new SyntaxErrorException($"Identifier [{id.Val}] redefined. ");
+                // throw new SyntaxErrorException($"Identifier [{id.Val}] redefined. ");
             }
         }
 

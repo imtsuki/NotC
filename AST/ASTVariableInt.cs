@@ -20,8 +20,8 @@ namespace C.AST
     /// <summary>
     /// Class ASTVariableInt.
     /// </summary>
-    /// <seealso cref="C.AST.ASTExpression" />
-    public class ASTVariableInt : ASTExpression
+    /// <seealso cref="C.AST.Expression" />
+    public class ASTVariableInt : Expression
     {
     }
 }

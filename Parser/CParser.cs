@@ -39,17 +39,22 @@ namespace C.Parser
         /// Parses the given Tokens to its AST representation.
         /// </summary>
         /// <returns>The root node of the given Tokens' AST.</returns>
-        public ASTExpression Parse()
+        public Expression Parse()
         {
-            return new ASTExpression();
+            return Expr();
         }
+
+        Stack<object> s;
 
         /// <summary>
         /// Exprs this instance.
         /// </summary>
-        public void Expr()
+        public Expression Expr()
         {
-            Term();
+            Expression parent = Term();
+            Expression leftTerm = parent;
+            Expression rightTerm = null;
+            
             while (true)
             {
                 switch (Lookahead.Kind)
@@ -59,16 +64,18 @@ namespace C.Parser
                         {
                             case OperatorVal.ADD:
                                 Match(OperatorVal.ADD);
-                                Term();
-                                Console.Write("+");
+                                rightTerm = Term();
+                                parent = new Add(leftTerm, rightTerm);
+                                leftTerm = parent;
                                 break;
                             case OperatorVal.SUB:
                                 Match(OperatorVal.SUB);
-                                Term();
-                                Console.Write("-");
+                                rightTerm = Term();
+                                parent = new Sub(leftTerm, rightTerm);
+                                leftTerm = parent;
                                 break;
                             default:
-                                return;
+                                return parent;
                         }
                         break;
                 }
@@ -79,9 +86,11 @@ namespace C.Parser
         /// Terms this instance.
         /// </summary>
         /// <exception cref="Exception">Syntax Error</exception>
-        public void Term()
+        public Expression Term()
         {
-            Factor();
+            Expression parent = Factor();
+            Expression leftFactor = parent;
+            Expression rightFactor = null;
             while (true)
             {
                 switch (Lookahead.Kind)
@@ -91,44 +100,52 @@ namespace C.Parser
                         {
                             case OperatorVal.MULT:
                                 Match(OperatorVal.MULT);
-                                Factor();
-                                Console.Write("*");
+                                rightFactor = Factor();
+                                parent = new Mult(leftFactor, rightFactor);
+                                leftFactor = parent;
                                 break;
                             case OperatorVal.DIV:
                                 Match(OperatorVal.DIV);
-                                Factor();
-                                Console.Write("/");
+                                rightFactor = Factor();
+                                parent = new Div(leftFactor, rightFactor);
+                                leftFactor = parent;
                                 break;
                             default:
-                                return;
+                                return parent;
                         }
                         break;
                 }
             }
         }
 
-        public void Factor()
+        public Expression Factor()
         {
+            Expression result = null;
             if (Lookahead.Kind == TokenKind.INT)
             {
-                Console.Write($"[{((TokenInt)Lookahead).Val}]");
+                result = new IntNumber((TokenInt)Lookahead);
                 Match(TokenKind.INT);
             }
             else if (Lookahead.Kind == TokenKind.IDENTIFIER)
             {
-                Console.Write($"[{((TokenIdentifier)Lookahead).Val}]");
+                // This line is remained only for test purpose. 
+                // Shall be removed after Environment is fully implemented.  
+                CurrentEnvironment.Put((TokenIdentifier)Lookahead);
+                // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                result = new Id(CurrentEnvironment.Get((TokenIdentifier)Lookahead));
                 Match(TokenKind.IDENTIFIER);
             }
             else if (Lookahead.Kind == TokenKind.OPERATOR)
             {
                 Match(OperatorVal.LPAREN);
-                Expr();
+                result = Expr();
                 Match(OperatorVal.RPAREN);
             }
             else
             {
                 throw new Exception("Syntax Error");
             }
+            return result;
         }
 
         /// <summary>

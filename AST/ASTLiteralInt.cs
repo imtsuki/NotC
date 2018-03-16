@@ -20,8 +20,8 @@ namespace C.AST
     /// <summary>
     /// Class ASTLiteralInt.
     /// </summary>
-    /// <seealso cref="C.AST.ASTExpression" />
-    public class ASTLiteralInt : ASTExpression
+    /// <seealso cref="C.AST.Expression" />
+    public class ASTLiteralInt : Expression
     {
     }
 }

@@ -20,7 +20,7 @@ namespace C.Parser
     /// <summary>
     /// Class Symbol.
     /// </summary>
-    class Symbol
+    public class Symbol
     {
         private static int count = -1;
         private static int NextId()
@@ -30,6 +30,7 @@ namespace C.Parser
         }
 
         private int id;
+        public int Id { get => id; }
         public Symbol()
         {
             this.id = NextId();
