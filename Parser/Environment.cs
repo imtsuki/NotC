@@ -4,7 +4,7 @@
 // Created          : 03-16-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-16-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="Environment.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -24,18 +24,15 @@ namespace C.Parser
     class Environment
     {
         /// <summary>
-        /// The symbol table
+        /// Gets or sets the symbol table.
         /// </summary>
-        private Hashtable symbolTable = new Hashtable(new Tokenizer.TokenIdentifier.Comparer());
+        /// <value>The symbol table.</value>
+        private Hashtable symbolTable { get; set; } = new Hashtable(new Tokenizer.TokenIdentifier.Comparer());
         /// <summary>
         /// Gets or sets the previous <see cref="Environment" />.
         /// </summary>
-        /// <value>The previous.</value>
-        protected Environment Previous
-        {
-            get;
-            set;
-        }
+        /// <value>The previous <see cref="Environment" />.</value>
+        protected Environment Previous { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Environment" /> class.

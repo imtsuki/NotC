@@ -165,21 +165,21 @@ namespace C.Parser
         /// <summary>
         /// The tokens
         /// </summary>
-        private IList<Token> Tokens;
+        private IList<Token> Tokens { get; set; }
         /// <summary>
         /// The lookahead position
         /// </summary>
-        private Int32 lookaheadPosition = -1;
+        private Int32 lookaheadPosition { get; set; } = -1;
 
         /// <summary>
         /// The lookahead
         /// </summary>
-        private Token Lookahead;
+        private Token Lookahead { get; set; }
 
         /// <summary>
         /// The current environment
         /// </summary>
-        private Environment CurrentEnvironment = new Environment(previous: null);
+        private Environment CurrentEnvironment { get; set; } = new Environment(previous: null);
 
         /// <summary>
         /// Returns the next terminal.

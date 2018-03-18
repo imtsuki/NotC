@@ -4,7 +4,7 @@
 // Created          : 03-16-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-16-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="Symbol.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -22,18 +22,17 @@ namespace C.Parser
     /// </summary>
     public class Symbol
     {
-        private static int count = -1;
+        private static int count { get; set; } = -1;
         private static int NextId()
         {
             count++;
             return count;
         }
 
-        private int id;
-        public int Id { get => id; }
+        public int Id { get; }
         public Symbol()
         {
-            this.id = NextId();
+            Id = NextId();
         }
     }
 }

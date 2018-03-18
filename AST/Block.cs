@@ -4,7 +4,7 @@
 // Created          : 03-17-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-17-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="Block.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -21,11 +21,12 @@ namespace C.AST
     /// Class Block.
     /// </summary>
     /// <seealso cref="C.AST.Statement" />
-    class Block : Statement
+    public class Block : Statement
     {
         /// <summary>
-        /// The statements in this Block. 
+        /// Gets or sets the statements.
         /// </summary>
-        public List<Statement> Statements;
+        /// <value>The statements.</value>
+        public List<Statement> Statements { get; set; }
     }
 }

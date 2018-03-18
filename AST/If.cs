@@ -4,7 +4,7 @@
 // Created          : 03-17-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-17-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="If.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -24,23 +24,23 @@ namespace C.AST
     public class If : Statement
     {
         /// <summary>
-        /// Gets the condition.
+        /// Gets or sets the condition.
         /// </summary>
         /// <value>The condition.</value>
-        public Expression Condition { get; }
+        public Expression Condition { get; set; }
         /// <summary>
-        /// Gets the true body.
+        /// Gets or sets the true body.
         /// </summary>
         /// <value>The true body.</value>
-        public Statement TrueBody { get; }
+        public Statement TrueBody { get; set; }
         /// <summary>
-        /// Gets the false body.
+        /// Gets or sets the false body.
         /// </summary>
         /// <value>The false body.</value>
-        public Statement FalseBody { get; }
+        public Statement FalseBody { get; set; }
 
         /// <summary>
-        /// Gets the (true) body.
+        /// Gets or sets the (true) body.
         /// </summary>
         /// <value>The (true) body.</value>
         public Statement Body => TrueBody;

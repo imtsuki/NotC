@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-16-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="ASTExpression.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -34,13 +34,11 @@ namespace C.AST
     /// <seealso cref="C.AST.Expression" />
     public class Id : Expression
     {
-        private Symbol symbol;
-
         /// <summary>
         /// Gets or sets the symbol.
         /// </summary>
         /// <value>The symbol.</value>
-        public Symbol Symbol { get => symbol; set => symbol = value; }
+        public Symbol Symbol { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Id"/> class.
@@ -57,7 +55,7 @@ namespace C.AST
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"[Id: {symbol.Id}]";
+            return $"[Id: {Symbol.Id}]";
         }
     }
 
@@ -68,9 +66,10 @@ namespace C.AST
     public class IntNumber : Expression
     {
         /// <summary>
-        /// The value
+        /// Gets or sets the value.
         /// </summary>
-        public Int64 Val;
+        /// <value>The value.</value>
+        public Int64 Val { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntNumber"/> class.

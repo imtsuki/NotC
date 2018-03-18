@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-16-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="ASTBinaryExpression.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -25,25 +25,15 @@ namespace C.AST
     public class BinaryExpression : Expression
     {
         /// <summary>
-        /// The right element of the expression.
-        /// </summary>
-        private Expression right;
-        /// <summary>
-        /// The left element of the expression.
-        /// </summary>
-        private Expression left;
-
-
-        /// <summary>
         /// Gets or sets the left element of the expression.
         /// </summary>
         /// <value>The LHS.</value>
-        public Expression Left { get => left; set => left = value; }
+        public Expression Left { get; set; }
         /// <summary>
         /// Gets or sets the right element of the expression.
         /// </summary>
         /// <value>The RHS.</value>
-        public Expression Right { get => right; set => right = value; }
+        public Expression Right { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
