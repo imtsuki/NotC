@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-18-2018
+// Last Modified On : 03-19-2018
 // ***********************************************************************
 // <copyright file="ASTExpression.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -22,8 +22,8 @@ namespace C.AST
     /// <summary>
     /// Represents an expression node in an AST.
     /// </summary>
-    /// <seealso cref="C.AST.ASTBase" />
-    public class Expression : ASTBase
+    /// <seealso cref="C.AST.Statement" />
+    public class Expression : Statement
     {
 
     }

@@ -4,7 +4,7 @@
 // Created          : 03-16-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-18-2018
+// Last Modified On : 03-19-2018
 // ***********************************************************************
 // <copyright file="Environment.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -32,7 +32,7 @@ namespace C.Parser
         /// Gets or sets the previous <see cref="Environment" />.
         /// </summary>
         /// <value>The previous <see cref="Environment" />.</value>
-        protected Environment Previous { get; set; }
+        public Environment Previous { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Environment" /> class.

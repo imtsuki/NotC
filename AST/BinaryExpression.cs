@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-18-2018
+// Last Modified On : 03-21-2018
 // ***********************************************************************
 // <copyright file="ASTBinaryExpression.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -147,6 +147,32 @@ namespace C.AST
         public override string ToString()
         {
             return $"({Left.ToString()} / {Right.ToString()})";
+        }
+    }
+
+    /// <summary>
+    /// The specific <see cref="BinaryExpression"/> class of '='.
+    /// </summary>
+    /// <seealso cref="C.AST.BinaryExpression" />
+    public class Assign : BinaryExpression
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Assign"/> class.
+        /// </summary>
+        /// <param name="left">The left element.</param>
+        /// <param name="right">The right element.</param>
+        public Assign(Expression left, Expression right) : base(left, right)
+        {
+
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return $"({Left.ToString()} = {Right.ToString()})";
         }
     }
 }

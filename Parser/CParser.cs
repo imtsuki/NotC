@@ -4,7 +4,7 @@
 // Created          : 03-14-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-16-2018
+// Last Modified On : 03-21-2018
 // ***********************************************************************
 // <copyright file="CParser.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -39,9 +39,95 @@ namespace C.Parser
         /// Parses the given Tokens to its AST representation.
         /// </summary>
         /// <returns>The root node of the given Tokens' AST.</returns>
-        public Expression Parse()
+        public Statement Parse()
         {
-            return Expr();
+            return Stmt();
+        }
+
+        private IList<Statement> Stmts()
+        {
+            List<Statement> stmts = new List<Statement>();
+            while (!(Lookahead.Kind == TokenKind.EOF ||
+                    (Lookahead.Kind == TokenKind.OPERATOR && ((TokenOperator)Lookahead).Val == OperatorVal.RCURL)))
+            {
+                stmts.Add(Stmt());
+            }
+            return stmts;
+        }
+        
+        private Statement Stmt()
+        {
+            Statement stmt = null;
+            switch (Lookahead.Kind)
+            {
+                case TokenKind.KEYWORD:
+                    switch (((TokenKeyword)Lookahead).Val)
+                    {
+                        case KeywordVal.IF:
+                            stmt = If();
+                            break;
+                    }
+                    break;
+                case TokenKind.OPERATOR:
+                    switch (((TokenOperator)Lookahead).Val)
+                    {
+                        case OperatorVal.LCURL:
+                            stmt = Block();
+                            break;
+                    }
+                    break;
+                case TokenKind.IDENTIFIER:
+                case TokenKind.INT:
+                    stmt = Assign();
+                    Match(OperatorVal.SEMICOLON);
+                    break;
+            }
+            return stmt;
+        }
+
+        private If If()
+        {
+            Match(KeywordVal.IF);
+            Match(OperatorVal.LPAREN);
+            Expression condition = Expr();
+            Match(OperatorVal.RPAREN);
+            Statement trueBody = Stmt();
+            return new If(condition, trueBody);
+        }
+
+        private Block Block()
+        {
+            Match(OperatorVal.LCURL);
+            var stmts = Stmts();
+            Match(OperatorVal.RCURL);
+            return new Block(stmts);
+        }
+
+        private Expression Assign()
+        {
+            Expression parent = Expr();
+            Expression leftExpr = parent;
+            Expression rightExpr = null;
+
+            while (true)
+            {
+                switch (Lookahead.Kind)
+                {
+                    case TokenKind.OPERATOR:
+                        switch (((TokenOperator)Lookahead).Val)
+                        {
+                            case OperatorVal.ASSIGN:
+                                Match(OperatorVal.ASSIGN);
+                                rightExpr = Expr();
+                                parent = new Assign(leftExpr, rightExpr);
+                                leftExpr = parent;
+                                break;
+                            default:
+                                return parent;
+                        }
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -218,6 +304,14 @@ namespace C.Parser
                 if (Lookahead.Kind == TokenKind.OPERATOR
                     && ((TokenOperator)Lookahead).Val == (OperatorVal)term)
                 {
+                    if (((TokenOperator)Lookahead).Val == OperatorVal.LCURL)
+                    {
+                        CurrentEnvironment = new Environment(CurrentEnvironment);
+                    }
+                    if (((TokenOperator)Lookahead).Val == OperatorVal.RCURL)
+                    {
+                        CurrentEnvironment = CurrentEnvironment.Previous;
+                    }
                     Lookahead = NextTerminal();
                 }
                 else

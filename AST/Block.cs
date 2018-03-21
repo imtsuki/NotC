@@ -4,7 +4,7 @@
 // Created          : 03-17-2018
 //
 // Last Modified By : Jason Qiu
-// Last Modified On : 03-18-2018
+// Last Modified On : 03-21-2018
 // ***********************************************************************
 // <copyright file="Block.cs" company="C">
 //     Copyright (c) . All rights reserved.
@@ -27,6 +27,22 @@ namespace C.AST
         /// Gets or sets the statements.
         /// </summary>
         /// <value>The statements.</value>
-        public List<Statement> Statements { get; set; }
+        public IList<Statement> Statements { get; set; }
+
+        public Block(IList<Statement> statements)
+        {
+            Statements = statements;
+        }
+
+        public override string ToString()
+        {
+            string result = "{\n";
+            foreach (var statement in Statements)
+            {
+                result += statement.ToString();
+            }
+            result += "\n}\n";
+            return result;
+        }
     }
 }

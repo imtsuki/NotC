@@ -47,6 +47,10 @@ Term -> Term * Factor {*}
 Factor-> INT        {INT}
 		| (Expr)
 
+Assign ->| Expr RestA
+RestA  ->| = Expr RestA
+         | EMPTY
+
 Expr  -> | Term RestE
 RestE -> | + Term {+} RestE
 		 | - Term {-} RestE

@@ -77,5 +77,9 @@ namespace C.AST
 
         }
 
+        public override string ToString()
+        {
+            return $"if ({Condition.ToString()}) {TrueBody.ToString()}";
+        }
     }
 }
