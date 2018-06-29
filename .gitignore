@@ -288,3 +288,4 @@ __pycache__/
 *.xsd.cs
 /劝进.txt
 /Help
+.vscode/
