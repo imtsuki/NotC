@@ -49,7 +49,6 @@ namespace C
             var parser = new Parser.CParser(tokens);
             var a = parser.Parse();
             Console.WriteLine(a.ToString());
-            Console.ReadKey();
         }
     }
 }

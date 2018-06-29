@@ -98,7 +98,9 @@ namespace C.Parser
         private Block Block()
         {
             Match(OperatorVal.LCURL);
+            CurrentEnvironment = new Environment(CurrentEnvironment);
             var stmts = Stmts();
+            CurrentEnvironment = CurrentEnvironment.Previous;
             Match(OperatorVal.RCURL);
             return new Block(stmts);
         }
@@ -304,14 +306,6 @@ namespace C.Parser
                 if (Lookahead.Kind == TokenKind.OPERATOR
                     && ((TokenOperator)Lookahead).Val == (OperatorVal)term)
                 {
-                    if (((TokenOperator)Lookahead).Val == OperatorVal.LCURL)
-                    {
-                        CurrentEnvironment = new Environment(CurrentEnvironment);
-                    }
-                    if (((TokenOperator)Lookahead).Val == OperatorVal.RCURL)
-                    {
-                        CurrentEnvironment = CurrentEnvironment.Previous;
-                    }
                     Lookahead = NextTerminal();
                 }
                 else
