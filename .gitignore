@@ -289,3 +289,4 @@ __pycache__/
 /劝进.txt
 /Help
 .vscode/
+.DS_Store

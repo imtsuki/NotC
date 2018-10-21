@@ -1,245 +1,80 @@
-﻿// ***********************************************************************
-// Assembly         : C
-// Author           : Jason Qiu
-// Created          : 03-06-2018
-//
-// Last Modified By : Jason Qiu
-// Last Modified On : 03-15-2018
-// ***********************************************************************
-// <copyright file="Scanner.cs" company="C">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace C.Tokenizer
 {
-    /// <summary>
-    /// Class Scanner.
-    /// </summary>
     public class Scanner
     {
-        /// <summary>
-        /// Enum StateOperator
-        /// </summary>
         public enum StateOperator
         {
-            /// <summary>
-            /// The start
-            /// </summary>
             START,
-            /// <summary>
-            /// The finish
-            /// </summary>
             FINISH,
-            /// <summary>
-            /// The failed
-            /// </summary>
             FAILED,
-            /// <summary>
-            /// The lt
-            /// </summary>
             LT,
-            /// <summary>
-            /// The gt
-            /// </summary>
             GT,
-            /// <summary>
-            /// The mod
-            /// </summary>
             MOD,
-            /// <summary>
-            /// The xor
-            /// </summary>
             XOR,
-            /// <summary>
-            /// The sub
-            /// </summary>
             SUB,
-            /// <summary>
-            /// The add
-            /// </summary>
             ADD,
-            /// <summary>
-            /// The amp
-            /// </summary>
             AMP,
-            /// <summary>
-            /// The eq
-            /// </summary>
             EQ,
-            /// <summary>
-            /// The not
-            /// </summary>
             NOT,
-            /// <summary>
-            /// The mult
-            /// </summary>
             MULT,
-            /// <summary>
-            /// The LTLT
-            /// </summary>
             LTLT,
-            /// <summary>
-            /// The GTGT
-            /// </summary>
             GTGT,
-            /// <summary>
-            /// The or
-            /// </summary>
             OR,
-            /// <summary>
-            /// The div
-            /// </summary>
             DIV
         }
 
-        /// <summary>
-        /// Enum StateIdentifier
-        /// </summary>
         public enum StateIdentifier
         {
-            /// <summary>
-            /// The start
-            /// </summary>
             START,
-            /// <summary>
-            /// The finish
-            /// </summary>
             FINISH,
-            /// <summary>
-            /// The failed
-            /// </summary>
             FAILED,
-            /// <summary>
-            /// The identifier
-            /// </summary>
             ID,
         }
 
-        /// <summary>
-        /// Enum StateNumber
-        /// </summary>
         public enum StateNumber
         {
-            /// <summary>
-            /// The start
-            /// </summary>
             START,
-            /// <summary>
-            /// The finish
-            /// </summary>
             FINISH,
-            /// <summary>
-            /// The failed
-            /// </summary>
             FAILED,
-            /// <summary>
-            /// The d
-            /// </summary>
             D,
         }
 
-        /// <summary>
-        /// Enum StateChar
-        /// </summary>
         public enum StateChar
         {
-            /// <summary>
-            /// The start
-            /// </summary>
             START,
-            /// <summary>
-            /// The finish
-            /// </summary>
             FINISH,
-            /// <summary>
-            /// The failed
-            /// </summary>
             FAILED,
-            /// <summary>
-            /// The c
-            /// </summary>
             C,
-            /// <summary>
-            /// The s
-            /// </summary>
             S,
-            /// <summary>
-            /// The so
-            /// </summary>
             SO,
-            /// <summary>
-            /// The soo
-            /// </summary>
             SOO,
-            /// <summary>
-            /// The sooo
-            /// </summary>
             SOOO,
-            /// <summary>
-            /// The sx
-            /// </summary>
             SX,
-            /// <summary>
-            /// The SXH
-            /// </summary>
             SXH,
-            /// <summary>
-            /// The SXHH
-            /// </summary>
             SXHH,
         }
 
-        /// <summary>
-        /// Enum StateString
-        /// </summary>
         public enum StateString
         {
-            /// <summary>
-            /// The start
-            /// </summary>
             START,
-            /// <summary>
-            /// The finish
-            /// </summary>
             FINISH,
-            /// <summary>
-            /// The failed
-            /// </summary>
             FAILED,
-            /// <summary>
-            /// The l
-            /// </summary>
             L,
-            /// <summary>
-            /// The q
-            /// </summary>
             Q,
-            /// <summary>
-            /// The qq
-            /// </summary>
             QQ,
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Scanner"/> class.
-        /// </summary>
-        /// <param name="source">The source.</param>
         public Scanner(String source)
         {
             this.Source = source;
 
         }
 
-        /// <summary>
-        /// Lexes this instance.
-        /// </summary>
-        /// <returns>IEnumerable&lt;Token&gt;.</returns>
         public IList<Token> Lex()
         {
             var tokens = new List<Token>();
@@ -265,11 +100,6 @@ namespace C.Tokenizer
             return tokens;
         }
 
-        /// <summary>
-        /// Gets the operator.
-        /// </summary>
-        /// <returns>Token.</returns>
-        /// <exception cref="Exception"></exception>
         private Token GetOperator()
         {
             StateOperator state = StateOperator.START;
@@ -571,10 +401,6 @@ namespace C.Tokenizer
             
         }
 
-        /// <summary>
-        /// Gets the identifier.
-        /// </summary>
-        /// <returns>Token.</returns>
         private Token GetIdentifier()
         {
             StateIdentifier state = StateIdentifier.START;
@@ -613,10 +439,6 @@ namespace C.Tokenizer
             
         }
 
-        /// <summary>
-        /// Gets the number.
-        /// </summary>
-        /// <returns>Token.</returns>
         private Token GetNumber()
         {
             Char c;
@@ -656,11 +478,6 @@ namespace C.Tokenizer
             }
         }
 
-        /// <summary>
-        /// Gets the character.
-        /// </summary>
-        /// <returns>Token.</returns>
-        /// <exception cref="Exception"></exception>
         private Token GetChar()
         {
             StateChar state = StateChar.START;
@@ -727,10 +544,6 @@ namespace C.Tokenizer
             }
         }
 
-        /// <summary>
-        /// Gets the string.
-        /// </summary>
-        /// <returns>Token.</returns>
         private Token GetString()
         {
             //TODO
@@ -747,53 +560,21 @@ namespace C.Tokenizer
             forward--;
         }
 
-        /// <summary>
-        /// Nexts the character.
-        /// </summary>
-        /// <returns>Char.</returns>
         private Char NextChar()
         {
             forward++;
             return Source[forward];
         }
 
-        /// <summary>
-        /// Gets the source.
-        /// </summary>
-        /// <value>The source.</value>
         public String Source { get; }
 
-        /// <summary>
-        /// The blanks
-        /// </summary>
         private HashSet<Char> blanks = new HashSet<Char>("\0\t\r\n ");
-        /// <summary>
-        /// The letters
-        /// </summary>
         private HashSet<Char> letters = new HashSet<Char>("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        /// <summary>
-        /// The digits
-        /// </summary>
         private HashSet<Char> digits = new HashSet<Char>("0123456789");
-        /// <summary>
-        /// The symbols
-        /// </summary>
         private HashSet<Char> symbols = new HashSet<Char>("~!%^&*()+-={}[]|:;<>,.?/");
-        /// <summary>
-        /// The character begin
-        /// </summary>
         private HashSet<Char> charBegin = new HashSet<Char>("'");
-        /// <summary>
-        /// The string begin
-        /// </summary>
         private HashSet<Char> stringBegin = new HashSet<Char>("\"");
-        /// <summary>
-        /// The lexeme begin
-        /// </summary>
         private Int32 lexemeBegin = 0;
-        /// <summary>
-        /// The forward
-        /// </summary>
         private Int32 forward = 0;
     }
 }

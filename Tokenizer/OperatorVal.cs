@@ -1,203 +1,96 @@
-﻿// ***********************************************************************
-// Assembly         : C
-// Author           : Jason Qiu
-// Created          : 03-15-2018
-//
-// Last Modified By : Jason Qiu
-// Last Modified On : 03-16-2018
-// ***********************************************************************
-// <copyright file="OperatorVal.cs" company="C">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-
-namespace C.Tokenizer
+﻿namespace C.Tokenizer
 {
-    /// <summary>
-    /// Enum OperatorVal
-    /// </summary>
     public enum OperatorVal
     {
-        /// <summary>
-        /// Represents '['. 
-        /// </summary>
+        // Represents '['. 
         LBRACKET,
-        /// <summary>
-        /// Represents ']'. 
-        /// </summary>
+        // Represents ']'. 
         RBRACKET,
-        /// <summary>
-        /// Represents '('. 
-        /// </summary>
+        // Represents '('. 
         LPAREN,
-        /// <summary>
-        /// Represents ')'. 
-        /// </summary>
+        // Represents ')'. 
         RPAREN,
-        /// <summary>
-        /// Represents '.'. 
-        /// </summary>
+        // Represents '.'. 
         PERIOD,
-        /// <summary>
-        /// Represents ','. 
-        /// </summary>
+        // Represents ','. 
         COMMA,
-        /// <summary>
-        /// Represents '?'. 
-        /// </summary>
+        // Represents '?'. 
         QUESTION,
-        /// <summary>
-        /// Represents ':'. 
-        /// </summary>
+        // Represents ':'. 
         COLON,
-        /// <summary>
-        /// Represents '~'. 
-        /// </summary>
+        // Represents '~'. 
         TILDE,
-        /// <summary>
-        /// Represents '-'. 
-        /// </summary>
+        // Represents '-'. 
         SUB,
-        /// <summary>
-        /// Represents '->'.
-        /// </summary>
+        // Represents '->'.
         RARROW,
-        /// <summary>
-        /// Represents '--'.
-        /// </summary>
+        // Represents '--'.
         DEC,
-        /// <summary>
-        /// Represents '-='.
-        /// </summary>
+        // Represents '-='.
         SUBASSIGN,
-        /// <summary>
-        /// Represents '+'. 
-        /// </summary>
+        // Represents '+'. 
         ADD,
-        /// <summary>
-        /// Represents '++'.
-        /// </summary>
+        // Represents '++'.
         INC,
-        /// <summary>
-        /// Represents '+='.
-        /// </summary>
+        // Represents '+='.
         ADDASSIGN,
-        /// <summary>
-        /// Represents '&'.
-        /// </summary>
+        // Represents '&'.
         BITAND,
-        /// <summary>
-        /// Represents '&&'.
-        /// </summary>
+        // Represents '&&'.
         AND,
-        /// <summary>
-        /// Represents '&='.
-        /// </summary>
+        // Represents '&='.
         ANDASSIGN,
-        /// <summary>
-        /// Represents '*'.
-        /// </summary>
+        // Represents '*'.
         MULT,
-        /// <summary>
-        /// Represents '*='.
-        /// </summary>
+        // Represents '*='.
         MULTASSIGN,
-        /// <summary>
-        /// Represents '<'.
-        /// </summary>
+        // Represents '<'.
         LT,
-        /// <summary>
-        /// Represents '<='.
-        /// </summary>
+        // Represents '<='.
         LEQ,
-        /// <summary>
-        /// Represents '<<'.
-        /// </summary>
+        // Represents '<<'.
         LSHIFT,
-        /// <summary>
-        /// Represents '<<='.
-        /// </summary>
+        // Represents '<<='.
         LSHIFTASSIGN,
-        /// <summary>
-        /// Represents '>'.
-        /// </summary>
+        // Represents '>'.
         GT,
-        /// <summary>
-        /// Represents '>='.
-        /// </summary>
+        // Represents '>='.
         GEQ,
-        /// <summary>
-        /// Represents '>>'.
-        /// </summary>
+        // Represents '>>'.
         RSHIFT,
-        /// <summary>
-        /// Represents '>>='.
-        /// </summary>
+        // Represents '>>='.
         RSHIFTASSIGN,
-        /// <summary>
-        /// Represents '='.
-        /// </summary>
+        // Represents '='.
         ASSIGN,
-        /// <summary>
-        /// Represents '=='.
-        /// </summary>
+        // Represents '=='.
         EQ,
-        /// <summary>
-        /// Represents '|'.
-        /// </summary>
+        // Represents '|'.
         BITOR,
-        /// <summary>
-        /// Represents '||'.
-        /// </summary>
+        // Represents '||'.
         OR,
-        /// <summary>
-        /// Represents '|='.
-        /// </summary>
+        // Represents '|='.
         ORASSIGN,
-        /// <summary>
-        /// Represents '!'.
-        /// </summary>
+        // Represents '!'.
         NOT,
-        /// <summary>
-        /// Represents '!='.
-        /// </summary>
+        // Represents '!='.
         NEQ,
-        /// <summary>
-        /// Represents '/'.
-        /// </summary>
+        // Represents '/'.
         DIV,
-        /// <summary>
-        /// Represents '/='.
-        /// </summary>
+        // Represents '/='.
         DIVASSIGN,
-        /// <summary>
-        /// Represents '%'.
-        /// </summary>
+        // Represents '%'.
         MOD,
-        /// <summary>
-        /// Represents '%='.
-        /// </summary>
+        // Represents '%='.
         MODASSIGN,
-        /// <summary>
-        /// Represents '^'.
-        /// </summary>
+        // Represents '^'.
         XOR,
-        /// <summary>
-        /// Represents '^='.
-        /// </summary>
+        // Represents '^='.
         XORASSIGN,
-        /// <summary>
-        /// Represents ';'.
-        /// </summary>
+        // Represents ';'.
         SEMICOLON,
-        /// <summary>
-        /// Represents '{'. 
-        /// </summary>
+        // Represents '{'. 
         LCURL,
-        /// <summary>
-        /// Represents '}'. 
-        /// </summary>
+        // Represents '}'. 
         RCURL
     }
 }

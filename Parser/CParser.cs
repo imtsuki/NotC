@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : C
-// Author           : Jason Qiu
-// Created          : 03-14-2018
-//
-// Last Modified By : Jason Qiu
-// Last Modified On : 03-21-2018
-// ***********************************************************************
-// <copyright file="CParser.cs" company="C">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using C.Tokenizer;
@@ -20,9 +7,6 @@ using System.Linq;
 
 namespace C.Parser
 {
-    /// <summary>
-    /// Class CParser.
-    /// </summary>
     class CParser
     {
         /// <summary>

@@ -1,26 +1,10 @@
-﻿// ***********************************************************************
-// Assembly         : C
-// Author           : Jason Qiu
-// Created          : 03-16-2018
-//
-// Last Modified By : Jason Qiu
-// Last Modified On : 03-19-2018
-// ***********************************************************************
-// <copyright file="Environment.cs" company="C">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 
 namespace C.Parser
 {
-    /// <summary>
-    /// Class Environment.
-    /// </summary>
     class Environment
     {
         /// <summary>
