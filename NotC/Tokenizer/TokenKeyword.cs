@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace C.Tokenizer
+namespace NotC.Tokenizer
 {
     public class TokenKeyword : Token
     {

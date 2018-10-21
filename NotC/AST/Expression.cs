@@ -14,15 +14,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using C.Parser;
-using C.Tokenizer;
+using NotC.Parser;
+using NotC.Tokenizer;
 
-namespace C.AST
+namespace NotC.AST
 {
     /// <summary>
     /// Represents an expression node in an AST.
     /// </summary>
-    /// <seealso cref="C.AST.Statement" />
+    /// <seealso cref="NotC.AST.Statement" />
     public class Expression : Statement
     {
 
@@ -31,7 +31,7 @@ namespace C.AST
     /// <summary>
     /// Represents an identifier node in an AST.
     /// </summary>
-    /// <seealso cref="C.AST.Expression" />
+    /// <seealso cref="NotC.AST.Expression" />
     public class Id : Expression
     {
         /// <summary>
@@ -62,7 +62,7 @@ namespace C.AST
     /// <summary>
     /// Represents an integer literal node in an AST.
     /// </summary>
-    /// <seealso cref="C.AST.Expression" />
+    /// <seealso cref="NotC.AST.Expression" />
     public class IntNumber : Expression
     {
         /// <summary>

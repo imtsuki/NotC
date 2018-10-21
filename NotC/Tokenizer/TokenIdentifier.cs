@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace C.Tokenizer
+namespace NotC.Tokenizer
 {
     public class TokenIdentifier : Token
     {

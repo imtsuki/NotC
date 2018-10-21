@@ -15,12 +15,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace C.AST
+namespace NotC.AST
 {
     /// <summary>
     /// Class If.
     /// </summary>
-    /// <seealso cref="C.AST.Statement" />
+    /// <seealso cref="NotC.AST.Statement" />
     public class If : Statement
     {
         /// <summary>

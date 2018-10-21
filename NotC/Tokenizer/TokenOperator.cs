@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace C.Tokenizer
+namespace NotC.Tokenizer
 {
     public class TokenOperator : Token
     {

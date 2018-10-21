@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 
-namespace C.Parser
+namespace NotC.Parser
 {
     class Environment
     {

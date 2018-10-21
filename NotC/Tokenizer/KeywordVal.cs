@@ -1,4 +1,4 @@
-﻿namespace C.Tokenizer
+﻿namespace NotC.Tokenizer
 {
     public enum KeywordVal
     {

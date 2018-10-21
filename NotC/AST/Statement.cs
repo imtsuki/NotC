@@ -15,12 +15,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace C.AST
+namespace NotC.AST
 {
     /// <summary>
     /// Represents a statement node in an AST.
     /// </summary>
-    /// <seealso cref="C.AST.ASTBase" />
+    /// <seealso cref="NotC.AST.ASTBase" />
     public class Statement : ASTBase
     {
     }

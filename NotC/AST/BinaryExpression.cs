@@ -14,14 +14,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using C.Tokenizer;
+using NotC.Tokenizer;
 
-namespace C.AST
+namespace NotC.AST
 {
     /// <summary>
     /// Represents a binary expression node in an AST. 
     /// </summary>
-    /// <seealso cref="C.AST.Expression" />
+    /// <seealso cref="NotC.AST.Expression" />
     public class BinaryExpression : Expression
     {
         /// <summary>
@@ -50,7 +50,7 @@ namespace C.AST
     /// <summary>
     /// The specific <see cref="BinaryExpression"/> class of '+'.
     /// </summary>
-    /// <seealso cref="C.AST.BinaryExpression" />
+    /// <seealso cref="NotC.AST.BinaryExpression" />
     public class Add : BinaryExpression
     {
         /// <summary>
@@ -76,7 +76,7 @@ namespace C.AST
     /// <summary>
     /// The specific <see cref="BinaryExpression"/> class of '-'.
     /// </summary>
-    /// <seealso cref="C.AST.BinaryExpression" />
+    /// <seealso cref="NotC.AST.BinaryExpression" />
     public class Sub : BinaryExpression
     {
         /// <summary>
@@ -101,7 +101,7 @@ namespace C.AST
     /// <summary>
     /// The specific <see cref="BinaryExpression"/> class of '*'.
     /// </summary>
-    /// <seealso cref="C.AST.BinaryExpression" />
+    /// <seealso cref="NotC.AST.BinaryExpression" />
     public class Mult : BinaryExpression
     {
         /// <summary>
@@ -127,7 +127,7 @@ namespace C.AST
     /// <summary>
     /// The specific <see cref="BinaryExpression"/> class of '/'.
     /// </summary>
-    /// <seealso cref="C.AST.BinaryExpression" />
+    /// <seealso cref="NotC.AST.BinaryExpression" />
     public class Div : BinaryExpression
     {
         /// <summary>
@@ -153,7 +153,7 @@ namespace C.AST
     /// <summary>
     /// The specific <see cref="BinaryExpression"/> class of '='.
     /// </summary>
-    /// <seealso cref="C.AST.BinaryExpression" />
+    /// <seealso cref="NotC.AST.BinaryExpression" />
     public class Assign : BinaryExpression
     {
         /// <summary>

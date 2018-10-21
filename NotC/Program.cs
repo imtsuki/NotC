@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using C.Tokenizer;
-using C.AST;
-namespace C
+using NotC.Tokenizer;
+using NotC.AST;
+namespace NotC
 {
     public class Program
     {
@@ -10,7 +10,7 @@ namespace C
         {
             Console.WriteLine("-------Viva la Vida!-------");
             //Test Tokenizer
-            String sourceCode = System.IO.File.ReadAllText("./TestCode/expr1.c.txt");
+            String sourceCode = System.IO.File.ReadAllText("../TestCode/expr1.notc");
             Scanner scanner = new Scanner(sourceCode);
             IList<Token> tokens = scanner.Lex();
             Console.WriteLine("-----------Source----------");

@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace C.AST
+namespace NotC.AST
 {
     class While : Statement
     {

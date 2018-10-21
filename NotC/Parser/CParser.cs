@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using C.Tokenizer;
-using C.AST;
+using NotC.Tokenizer;
+using NotC.AST;
 using System.Linq;
 
-namespace C.Parser
+namespace NotC.Parser
 {
     class CParser
     {
