@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace NotC.Parser
 {
-    class CParser
+    public class CParser
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CParser"/> class.
