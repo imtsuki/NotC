@@ -14,7 +14,8 @@ namespace NotC.Tokenizer
         IDENTIFIER,
         KEYWORD,
         OPERATOR,
-        EOF
+        EOF,
+        ERROR
     }
 
     public abstract class Token

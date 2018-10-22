@@ -124,7 +124,7 @@ namespace NotC.Parser
 		///          | ε
         /// </summary>
         /// <returns>Expression Node.</returns>
-        private Expression Expr()
+        public Expression Expr()
         {
             Expression parent = Term();
             Expression leftTerm = parent;
@@ -153,6 +153,8 @@ namespace NotC.Parser
                                 return parent;
                         }
                         break;
+                    default:
+                        return parent;
                 }
             }
         }
@@ -193,6 +195,8 @@ namespace NotC.Parser
                                 return parent;
                         }
                         break;
+                    default:
+                        return parent;
                 }
             }
         }
@@ -272,7 +276,6 @@ namespace NotC.Parser
         /// </exception>
         private void Match(object term)
         {
-            
             if (term.GetType().Equals(typeof(KeywordVal)))
             {
                 if (Lookahead.Kind == TokenKind.KEYWORD 

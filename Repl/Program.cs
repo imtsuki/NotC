@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using NotC.Tokenizer;
 using NotC.AST;
 namespace NotC
@@ -8,27 +9,24 @@ namespace NotC
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("-------Viva la Vida!-------");
-            //Test Tokenizer
-            String sourceCode = System.IO.File.ReadAllText("../TestCode/expr1.notc");
-            Scanner scanner = new Scanner(sourceCode);
-            IList<Token> tokens = scanner.Lex();
-            Console.WriteLine("-----------Source----------");
-            Console.WriteLine();
-            Console.WriteLine(sourceCode);
-            Console.WriteLine("-------End of Source-------");
-            Console.WriteLine("-----------Tokens----------");
-            Console.WriteLine();
-            foreach (var item in tokens)
+            while (true)
             {
-                Console.WriteLine(item.ToString());
+                Console.Write("> ");
+                String input = Console.ReadLine();
+                var scanner = new Scanner(input);
+                var parser = new Parser.CParser(scanner.Lex());
+                if (scanner.LexErrors.Any()) {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    foreach (var message in scanner.LexErrors) {
+                        Console.WriteLine($"ERROR: {message}");
+                    }
+                    Console.ResetColor();
+                }
+                var result = parser.Expr();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(result.ToString());
+                Console.ResetColor();
             }
-            Console.WriteLine();
-            Console.WriteLine("-------End of Tokens-------");
-            Console.WriteLine("-------Viva la Vida!-------");
-            var parser = new Parser.CParser(tokens);
-            var a = parser.Parse();
-            Console.WriteLine(a.ToString());
         }
     }
 }
