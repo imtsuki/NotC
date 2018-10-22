@@ -43,7 +43,8 @@ namespace NotC.Tokenizer
         public Scanner(String source)
         {
             this.Source = source;
-            this.Source += " ";
+            if (Source.Last() != '\n')
+                Source += "\n";
 
         }
 
@@ -226,10 +227,21 @@ namespace NotC.Tokenizer
 
         private Token GetString()
         {
-            //TODO
-            StateString state = StateString.START;
-            Char c;
-            return new TokenString("string");
+            int length = 0;
+            NextChar();
+            while(true)
+            {
+                Char c = NextChar();
+                if (c == '"')
+                    break;
+                if (c == '\n') {
+                    LexErrors.Add("Unexpected Line Ending While Parsing String. ");
+                    return new TokenError();
+                }
+                length++;
+            }
+            string str = Source.Substring(lexemeBegin + 1, length);
+            return new TokenString(str);
         }
 
         private void Retract()

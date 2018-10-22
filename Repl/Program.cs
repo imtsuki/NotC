@@ -14,7 +14,12 @@ namespace NotC
                 Console.Write("> ");
                 String input = Console.ReadLine();
                 var scanner = new Scanner(input);
-                var parser = new Parser.CParser(scanner.Lex());
+                var tokens = scanner.Lex();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                foreach (var token in tokens) {
+                    Console.WriteLine(token.ToString());
+                }
+                Console.ResetColor();
                 if (scanner.LexErrors.Any()) {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     foreach (var message in scanner.LexErrors) {
@@ -22,6 +27,7 @@ namespace NotC
                     }
                     Console.ResetColor();
                 }
+                var parser = new Parser.CParser(tokens);
                 var result = parser.Expr();
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine(result.ToString());
