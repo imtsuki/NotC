@@ -13,6 +13,9 @@ namespace NotC
             {
                 Console.Write("> ");
                 String input = Console.ReadLine();
+                if (input == ":q") {
+                    return;
+                }
                 var scanner = new Scanner(input);
                 var tokens = scanner.Lex();
                 Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -29,6 +32,13 @@ namespace NotC
                 }
                 var parser = new Parser.CParser(tokens);
                 var result = parser.Expr();
+                if (parser.ParseErrors.Any()) {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    foreach (var message in parser.ParseErrors) {
+                        Console.WriteLine($"ERROR: {message}");
+                    }
+                    Console.ResetColor();
+                }
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine(result.ToString());
                 Console.ResetColor();

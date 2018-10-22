@@ -30,16 +30,6 @@ namespace NotC.Tokenizer
             SXHH,
         }
 
-        public enum StateString
-        {
-            START,
-            FINISH,
-            FAILED,
-            L,
-            Q,
-            QQ,
-        }
-
         public Scanner(String source)
         {
             this.Source = source;
@@ -92,13 +82,15 @@ namespace NotC.Tokenizer
                 length++;
             }
             string op = Source.Substring(lexemeBegin, length);
-            if (TokenOperator.Operators.ContainsKey(op)) {
-                return new TokenOperator(TokenOperator.Operators[op]);
+            while (length > 0) {
+                if (TokenOperator.Operators.ContainsKey(op.Substring(0, length))) {
+                    forward = lexemeBegin + length - 1;
+                    return new TokenOperator(TokenOperator.Operators[op.Substring(0, length)]);
+                }
+                length--;
             }
-            else {
-                LexErrors.Add($"Cannot Parse Operator {op}. ");
-                return new TokenError();
-            }
+            LexErrors.Add($"Cannot Parse Operator {op}. ");
+            return new TokenError();
         }
 
         private Token GetIdentifier()

@@ -9,20 +9,13 @@ namespace NotC.Parser
 {
     public class CParser
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CParser"/> class.
-        /// </summary>
-        /// <param name="tokens">The tokens.</param>
+        public List<string> ParseErrors = new List<string>();
         public CParser(IList<Token> tokens)
         {
             Tokens = tokens;
             Lookahead = NextTerminal();
         }
 
-        /// <summary>
-        /// Parses the given Tokens to its AST representation.
-        /// </summary>
-        /// <returns>The root node of the given Tokens' AST.</returns>
         public Statement Parse()
         {
             return Stmt();
@@ -233,34 +226,15 @@ namespace NotC.Parser
             }
             else
             {
-                throw new Exception("Syntax Error");
+                ParseErrors.Add("Syntax Error");
             }
             return result;
         }
 
-        /// <summary>
-        /// The tokens
-        /// </summary>
         private IList<Token> Tokens { get; set; }
-        /// <summary>
-        /// The lookahead position
-        /// </summary>
         private Int32 lookaheadPosition { get; set; } = -1;
-
-        /// <summary>
-        /// The lookahead
-        /// </summary>
         private Token Lookahead { get; set; }
-
-        /// <summary>
-        /// The current environment
-        /// </summary>
         private Environment CurrentEnvironment { get; set; } = new Environment(previous: null);
-
-        /// <summary>
-        /// Returns the next terminal.
-        /// </summary>
-        /// <returns>Next terminal.</returns>
         private Token NextTerminal()
         {
             lookaheadPosition++;
@@ -268,12 +242,6 @@ namespace NotC.Parser
             
         }
 
-        /// <summary>
-        /// Matches the specified terminal.
-        /// </summary>
-        /// <param name="term">The terminal.</param>
-        /// <exception cref="Exception">
-        /// </exception>
         private void Match(object term)
         {
             if (term.GetType().Equals(typeof(KeywordVal)))
@@ -285,7 +253,7 @@ namespace NotC.Parser
                 }
                 else
                 {
-                    throw new Exception($"{term} Not Matched");
+                    ParseErrors.Add($"Got {Lookahead}, Expected {term}");
                 }
             }
             else if (term.GetType().Equals(typeof(OperatorVal)))
@@ -297,7 +265,7 @@ namespace NotC.Parser
                 }
                 else
                 {
-                    throw new Exception($"{term} Not Matched");
+                    ParseErrors.Add($"Got {Lookahead}, Expected {term}");
                 }
             }
             else if (term.GetType().Equals(typeof(TokenKind)))
@@ -308,7 +276,7 @@ namespace NotC.Parser
                 }
                 else
                 {
-                    throw new Exception($"{term} Not Matched");
+                    ParseErrors.Add($"Got {Lookahead}, Expected {term}");
                 }
             }
         }  
