@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public enum TokenKind
     {
@@ -24,7 +24,7 @@ namespace NotC.Tokenizer
         {
             return Kind.ToString();
         }
-        
+        int position;
         public abstract TokenKind Kind { get; }
     }
 }

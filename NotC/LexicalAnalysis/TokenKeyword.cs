@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public sealed class TokenKeyword : Token
     {

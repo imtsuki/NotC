@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public sealed class TokenEOF : Token
     {

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public sealed class TokenOperator : Token
     {

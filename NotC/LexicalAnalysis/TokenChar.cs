@@ -1,20 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public sealed class TokenChar : Token
     {
-        public TokenChar(Char val) => this.Val = val;
+        public TokenChar(char val) => this.Val = val;
 
         public override TokenKind Kind { get; } = TokenKind.CHAR;
 
-        public Char Val { get; }
+        public char Val { get; }
 
-        public override String ToString()
-        {
-            return $"{this.Kind}: '{this.Val}'";
-        }
+        public override String ToString() => $"{this.Kind}: '{this.Val}'";
     }
 }

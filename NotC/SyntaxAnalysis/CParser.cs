@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using NotC.Tokenizer;
+using NotC.LexicalAnalysis;
 using NotC.AST;
 using System.Linq;
 
@@ -10,20 +10,20 @@ namespace NotC.Parser
     public class CParser
     {
         public List<string> ParseErrors = new List<string>();
-        public CParser(IList<Token> tokens)
+        public CParser(IEnumerable<Token> tokens)
         {
-            Tokens = tokens;
+            Tokens = (IList<Token>)tokens;
             Lookahead = NextTerminal();
         }
 
-        public Statement Parse()
+        public ASTStatement Parse()
         {
             return Stmt();
         }
 
-        private IList<Statement> Stmts()
+        private IList<ASTStatement> Stmts()
         {
-            List<Statement> stmts = new List<Statement>();
+            List<ASTStatement> stmts = new List<ASTStatement>();
             while (!(Lookahead.Kind == TokenKind.EOF ||
                     (Lookahead.Kind == TokenKind.OPERATOR && ((TokenOperator)Lookahead).Val == OperatorVal.RCURL)))
             {
@@ -32,9 +32,9 @@ namespace NotC.Parser
             return stmts;
         }
         
-        private Statement Stmt()
+        private ASTStatement Stmt()
         {
-            Statement stmt = null;
+            ASTStatement stmt = null;
             switch (Lookahead.Kind)
             {
                 case TokenKind.KEYWORD:
@@ -66,9 +66,9 @@ namespace NotC.Parser
         {
             Match(KeywordVal.IF);
             Match(OperatorVal.LPAREN);
-            Expression condition = Expr();
+            ASTExpression condition = Expr();
             Match(OperatorVal.RPAREN);
-            Statement trueBody = Stmt();
+            ASTStatement trueBody = Stmt();
             return new If(condition, trueBody);
         }
 
@@ -82,11 +82,11 @@ namespace NotC.Parser
             return new Block(stmts);
         }
 
-        private Expression Assign()
+        private ASTExpression Assign()
         {
-            Expression parent = Expr();
-            Expression leftExpr = parent;
-            Expression rightExpr = null;
+            ASTExpression parent = Expr();
+            ASTExpression leftExpr = parent;
+            ASTExpression rightExpr = null;
 
             while (true)
             {
@@ -117,11 +117,11 @@ namespace NotC.Parser
 		///          | ε
         /// </summary>
         /// <returns>Expression Node.</returns>
-        public Expression Expr()
+        public ASTExpression Expr()
         {
-            Expression parent = Term();
-            Expression leftTerm = parent;
-            Expression rightTerm = null;
+            ASTExpression parent = Term();
+            ASTExpression leftTerm = parent;
+            ASTExpression rightTerm = null;
             
             while (true)
             {
@@ -160,11 +160,11 @@ namespace NotC.Parser
         ///          | ε
         /// </summary>
         /// <returns>Expression Node.</returns>
-        private Expression Term()
+        private ASTExpression Term()
         {
-            Expression parent = Factor();
-            Expression leftFactor = parent;
-            Expression rightFactor = null;
+            ASTExpression parent = Factor();
+            ASTExpression leftFactor = parent;
+            ASTExpression rightFactor = null;
             while (true)
             {
                 switch (Lookahead.Kind)
@@ -201,9 +201,9 @@ namespace NotC.Parser
         ///          | ( Expr )
         /// </summary>
         /// <returns>Expression Node.</returns>
-        private Expression Factor()
+        private ASTExpression Factor()
         {
-            Expression result = null;
+            ASTExpression result = null;
             if (Lookahead.Kind == TokenKind.INT)
             {
                 result = new IntNumber((TokenInt)Lookahead);

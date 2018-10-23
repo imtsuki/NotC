@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : C
-// Author           : Jason Qiu
-// Created          : 03-17-2018
-//
-// Last Modified By : Jason Qiu
-// Last Modified On : 03-18-2018
-// ***********************************************************************
-// <copyright file="If.cs" company="C">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,30 +7,30 @@ namespace NotC.AST
     /// <summary>
     /// Class If.
     /// </summary>
-    /// <seealso cref="NotC.AST.Statement" />
-    public class If : Statement
+    /// <seealso cref="NotC.AST.ASTStatement" />
+    public class If : ASTStatement
     {
         /// <summary>
         /// Gets or sets the condition.
         /// </summary>
         /// <value>The condition.</value>
-        public Expression Condition { get; set; }
+        public ASTExpression Condition { get; set; }
         /// <summary>
         /// Gets or sets the true body.
         /// </summary>
         /// <value>The true body.</value>
-        public Statement TrueBody { get; set; }
+        public ASTStatement TrueBody { get; set; }
         /// <summary>
         /// Gets or sets the false body.
         /// </summary>
         /// <value>The false body.</value>
-        public Statement FalseBody { get; set; }
+        public ASTStatement FalseBody { get; set; }
 
         /// <summary>
         /// Gets or sets the (true) body.
         /// </summary>
         /// <value>The (true) body.</value>
-        public Statement Body => TrueBody;
+        public ASTStatement Body => TrueBody;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class with structure like:
@@ -52,7 +39,7 @@ namespace NotC.AST
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="body">The body.</param>
-        public If(Expression condition, Statement body)
+        public If(ASTExpression condition, ASTStatement body)
         {
             Condition = condition;
             TrueBody = body;
@@ -69,7 +56,7 @@ namespace NotC.AST
         /// <param name="condition">The condition.</param>
         /// <param name="trueBody">The true body.</param>
         /// <param name="falseBody">The false body.</param>
-        public If(Expression condition, Statement trueBody, Statement falseBody)
+        public If(ASTExpression condition, ASTStatement trueBody, ASTStatement falseBody)
         {
             Condition = condition;
             TrueBody = trueBody;

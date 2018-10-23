@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
@@ -11,7 +11,7 @@ namespace NotC.Parser
         /// Gets or sets the symbol table.
         /// </summary>
         /// <value>The symbol table.</value>
-        private Hashtable symbolTable { get; set; } = new Hashtable(new Tokenizer.TokenIdentifier.Comparer());
+        private Hashtable symbolTable { get; set; } = new Hashtable(new LexicalAnalysis.TokenIdentifier.Comparer());
         /// <summary>
         /// Gets or sets the previous <see cref="Environment" />.
         /// </summary>
@@ -31,7 +31,7 @@ namespace NotC.Parser
         /// Generate a new <see cref="Symbol" /> of the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        public void Put(Tokenizer.TokenIdentifier id)
+        public void Put(LexicalAnalysis.TokenIdentifier id)
         {
             if (!this.Contains(id))
             {
@@ -48,7 +48,7 @@ namespace NotC.Parser
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Symbol.</returns>
-        public Symbol Get(Tokenizer.TokenIdentifier id)
+        public Symbol Get(LexicalAnalysis.TokenIdentifier id)
         {
             for (Environment env = this; env != null; env = env.Previous)
             {
@@ -65,7 +65,7 @@ namespace NotC.Parser
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns><c>true</c> if [contains] [the specified identifier]; otherwise, <c>false</c>.</returns>
-        public bool Contains(Tokenizer.TokenIdentifier id)
+        public bool Contains(LexicalAnalysis.TokenIdentifier id)
         {
             return symbolTable.Contains(id);
         }

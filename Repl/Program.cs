@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NotC.Tokenizer;
+using NotC.LexicalAnalysis;
 using NotC.AST;
 namespace NotC
 {
@@ -17,7 +17,7 @@ namespace NotC
                     return;
                 }
                 var scanner = new Scanner(input);
-                var tokens = scanner.Lex();
+                var tokens = scanner.Scan();
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 foreach (var token in tokens) {
                     Console.WriteLine(token.ToString());

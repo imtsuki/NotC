@@ -1,4 +1,4 @@
-﻿namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public enum KeywordVal
     {

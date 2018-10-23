@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NotC.Tokenizer
+namespace NotC.LexicalAnalysis
 {
     public class Scanner
     {
@@ -38,7 +38,7 @@ namespace NotC.Tokenizer
 
         }
 
-        public IEnumerable<Token> Lex()
+        public IEnumerable<Token> Scan()
         {
             var tokens = new List<Token>();
 
@@ -74,7 +74,7 @@ namespace NotC.Tokenizer
         {
             int length = 0;
             while (true) {
-                char c = NextChar();
+                char c = Next();
                 if (!Char.IsPunctuation(c) && !Char.IsSymbol(c)) {
                     Retract();
                     break;
@@ -98,7 +98,7 @@ namespace NotC.Tokenizer
             int length = 0;
             while(true)
             {
-                Char c = NextChar();
+                Char c = Next();
                 if (Char.IsPunctuation(c) || Char.IsSymbol(c) || Char.IsWhiteSpace(c)) {
                     Retract();
                     break;
@@ -123,14 +123,14 @@ namespace NotC.Tokenizer
                 switch (state)
                 {
                     case StateNumber.START:
-                        c = NextChar();
+                        c = Next();
                         digit = Convert.ToInt32(c) - 0x30;
                         number *= 10;
                         number += digit;
                         state = StateNumber.D;
                         break;
                     case StateNumber.D:
-                        c = NextChar();
+                        c = Next();
                         if (Char.IsDigit(c))
                         {
                             digit = Convert.ToInt32(c) - 0x30;
@@ -155,7 +155,7 @@ namespace NotC.Tokenizer
         {
             StateChar state = StateChar.START;
             Char c = '\0';
-            NextChar();
+            Next();
             var invalidChars = new HashSet<Char>("\'\n");
             string escapeChars = @"abfnrtv'""\";
             string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
@@ -165,7 +165,7 @@ namespace NotC.Tokenizer
                 switch (state)
                 {
                     case StateChar.START:
-                        c = NextChar();
+                        c = Next();
                         switch (c)
                         {
                             case '\\':
@@ -186,7 +186,7 @@ namespace NotC.Tokenizer
                         break;
                     case StateChar.C:
                         result = new TokenChar(val: c);
-                        c = NextChar();
+                        c = Next();
                         if (c == '\'')
                         {
                             state = StateChar.FINISH;
@@ -197,7 +197,7 @@ namespace NotC.Tokenizer
                         }
                         break;
                     case StateChar.S:
-                        c = NextChar();
+                        c = Next();
                         if (escapeChars.Contains(c))
                         {
                             c = correspondingEscapeChars[escapeChars.IndexOf(c)];
@@ -212,7 +212,6 @@ namespace NotC.Tokenizer
                         return result;
                     case StateChar.FAILED:
                         throw new Exception();
-
                 }
             }
         }
@@ -220,10 +219,10 @@ namespace NotC.Tokenizer
         private Token GetString()
         {
             int length = 0;
-            NextChar();
+            Next();
             while(true)
             {
-                Char c = NextChar();
+                Char c = Next();
                 if (c == '"')
                     break;
                 if (c == '\n') {
@@ -241,7 +240,7 @@ namespace NotC.Tokenizer
             forward--;
         }
 
-        private Char NextChar()
+        private Char Next()
         {
             forward++;
             return Source[forward];
