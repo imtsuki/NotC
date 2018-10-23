@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NotC.Tokenizer
 {
-    public class TokenOperator : Token
+    public sealed class TokenOperator : Token
     {
         public TokenOperator(OperatorVal val)
         {

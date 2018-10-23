@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NotC.Tokenizer
 {
-    public class TokenChar : Token
+    public sealed class TokenChar : Token
     {
         public TokenChar(Char val) => this.Val = val;
 

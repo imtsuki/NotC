@@ -38,7 +38,7 @@ namespace NotC.Tokenizer
 
         }
 
-        public IList<Token> Lex()
+        public IEnumerable<Token> Lex()
         {
             var tokens = new List<Token>();
 

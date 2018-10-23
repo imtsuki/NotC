@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NotC.Tokenizer
 {
-    public class TokenInt : Token
+    public sealed class TokenInt : Token
     {
         public TokenInt(Int64 val) => this.Val = val;
 

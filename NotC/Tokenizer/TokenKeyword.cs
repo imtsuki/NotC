@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NotC.Tokenizer
 {
-    public class TokenKeyword : Token
+    public sealed class TokenKeyword : Token
     {
         public TokenKeyword(KeywordVal val) => this.Val = val;
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NotC.Tokenizer
 {
-    public class TokenString : Token
+    public sealed class TokenString : Token
     {
         public TokenString(String val)
         {

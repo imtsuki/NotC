@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace NotC.Tokenizer
 {
-    public class TokenIdentifier : Token
+    public sealed class TokenIdentifier : Token
     {
         public class Comparer : IEqualityComparer
         {

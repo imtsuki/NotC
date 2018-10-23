@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NotC.Tokenizer
 {
-    class TokenEOF : Token
+    public sealed class TokenEOF : Token
     {
         public override TokenKind Kind { get; } = TokenKind.EOF;
     }
