@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using NotC.Parser;
+using NotC.SyntaxAnalysis;
 using NotC.LexicalAnalysis;
 
 namespace NotC.AST {

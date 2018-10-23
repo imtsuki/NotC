@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NotC.LexicalAnalysis;
 using NotC.AST;
-using System.Linq;
 
-namespace NotC.Parser
+namespace NotC.SyntaxAnalysis
 {
-    public class CParser
+    public class Parser
     {
         public List<string> ParseErrors = new List<string>();
-        public CParser(IEnumerable<Token> tokens)
+        public Parser(IEnumerable<Token> tokens)
         {
             Tokens = (IList<Token>)tokens;
             Lookahead = NextTerminal();
@@ -114,7 +112,7 @@ namespace NotC.Parser
         /// Expr  -> | Term RestE
         /// RestE -> | + Term {+} RestE
 		///          | - Term {-} RestE
-		///          | ε
+		///          | Îµ
         /// </summary>
         /// <returns>Expression Node.</returns>
         public ASTExpression Expr()
@@ -157,7 +155,7 @@ namespace NotC.Parser
         /// Term  -> | Factor RestT
         /// RestT -> | * Factor {*} RestT
         ///          | / Factor {/} RestT
-        ///          | ε
+        ///          | Îµ
         /// </summary>
         /// <returns>Expression Node.</returns>
         private ASTExpression Term()

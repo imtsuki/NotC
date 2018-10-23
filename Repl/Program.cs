@@ -30,7 +30,7 @@ namespace NotC
                     }
                     Console.ResetColor();
                 }
-                var parser = new Parser.CParser(tokens);
+                var parser = new SyntaxAnalysis.Parser(tokens);
                 var result = parser.Expr();
                 if (parser.ParseErrors.Any()) {
                     Console.ForegroundColor = ConsoleColor.DarkRed;

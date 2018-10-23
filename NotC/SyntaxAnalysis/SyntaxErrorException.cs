@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NotC.Parser
+namespace NotC.SyntaxAnalysis
 {
     class SyntaxErrorException : Exception
     {
