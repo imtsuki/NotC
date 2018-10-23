@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using NotC.SyntaxAnalysis;
 
 namespace NotC.LexicalAnalysis
 {
@@ -18,7 +19,7 @@ namespace NotC.LexicalAnalysis
         ERROR
     }
 
-    public abstract class Token
+    public abstract class Token : SyntaxNode
     {
         public override String ToString()
         {
@@ -26,5 +27,9 @@ namespace NotC.LexicalAnalysis
         }
         int position;
         public abstract TokenKind Kind { get; }
+
+        public override IEnumerable<SyntaxNode> GetChildren() {
+            return Enumerable.Empty<SyntaxNode>();
+        }
     }
 }

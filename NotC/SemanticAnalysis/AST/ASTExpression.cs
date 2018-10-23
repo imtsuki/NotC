@@ -7,7 +7,7 @@ using NotC.LexicalAnalysis;
 namespace NotC.AST {
     public class ASTExpression : ASTStatement
     {
-
+        public Type Type;
     }
 
     public class Id : ASTExpression
