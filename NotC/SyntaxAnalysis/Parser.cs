@@ -23,7 +23,7 @@ namespace NotC.SyntaxAnalysis
         {
             List<ASTStatement> stmts = new List<ASTStatement>();
             while (!(Lookahead.Kind == TokenKind.EOF ||
-                    (Lookahead.Kind == TokenKind.OPERATOR && ((TokenOperator)Lookahead).Val == OperatorVal.RCURL)))
+                    (Lookahead.Kind == TokenKind.OPERATOR && ((TokenOperator)Lookahead).Val == "}")))
             {
                 stmts.Add(Stmt());
             }
@@ -46,7 +46,7 @@ namespace NotC.SyntaxAnalysis
                 case TokenKind.OPERATOR:
                     switch (((TokenOperator)Lookahead).Val)
                     {
-                        case OperatorVal.LCURL:
+                        case "{":
                             stmt = Block();
                             break;
                     }
@@ -93,7 +93,7 @@ namespace NotC.SyntaxAnalysis
                     case TokenKind.OPERATOR:
                         switch (((TokenOperator)Lookahead).Val)
                         {
-                            case OperatorVal.ASSIGN:
+                            case "=":
                                 Match(OperatorVal.ASSIGN);
                                 rightExpr = Expr();
                                 parent = new Assign(leftExpr, rightExpr);
@@ -128,13 +128,13 @@ namespace NotC.SyntaxAnalysis
                     case TokenKind.OPERATOR:
                         switch (((TokenOperator)Lookahead).Val)
                         {
-                            case OperatorVal.ADD:
+                            case "+":
                                 Match(OperatorVal.ADD);
                                 rightTerm = Term();
                                 parent = new Add(leftTerm, rightTerm);
                                 leftTerm = parent;
                                 break;
-                            case OperatorVal.SUB:
+                            case "-":
                                 Match(OperatorVal.SUB);
                                 rightTerm = Term();
                                 parent = new Sub(leftTerm, rightTerm);
@@ -170,13 +170,13 @@ namespace NotC.SyntaxAnalysis
                     case TokenKind.OPERATOR:
                         switch (((TokenOperator)Lookahead).Val)
                         {
-                            case OperatorVal.MULT:
+                            case "*":
                                 Match(OperatorVal.MULT);
                                 rightFactor = Factor();
                                 parent = new Mult(leftFactor, rightFactor);
                                 leftFactor = parent;
                                 break;
-                            case OperatorVal.DIV:
+                            case "/":
                                 Match(OperatorVal.DIV);
                                 rightFactor = Factor();
                                 parent = new Div(leftFactor, rightFactor);
@@ -254,10 +254,10 @@ namespace NotC.SyntaxAnalysis
                     ParseErrors.Add($"Got {Lookahead}, Expected {term}");
                 }
             }
-            else if (term.GetType().Equals(typeof(OperatorVal)))
+            else if (term.GetType().Equals(typeof(string)))
             {
                 if (Lookahead.Kind == TokenKind.OPERATOR
-                    && ((TokenOperator)Lookahead).Val == (OperatorVal)term)
+                    && ((TokenOperator)Lookahead).Val == (string)term)
                 {
                     Lookahead = NextTerminal();
                 }

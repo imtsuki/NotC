@@ -6,13 +6,13 @@ namespace NotC.LexicalAnalysis
 {
     public sealed class TokenOperator : Token
     {
-        public TokenOperator(OperatorVal val)
+        public TokenOperator(string val)
         {
             this.Val = val;
         }
         public override TokenKind Kind { get; } = TokenKind.OPERATOR;
 
-        public OperatorVal Val { get; }
+        public string Val { get; }
 
         public static Dictionary<String, OperatorVal> Operators { get; } = new Dictionary<string, OperatorVal>()
         {
@@ -65,7 +65,7 @@ namespace NotC.LexicalAnalysis
 
         public override String ToString()
         {
-            return $"{this.Kind}: {this.Val}: {Operators.First(pair => pair.Value == this.Val).Key}";
+            return $"{this.Kind}: {this.Val}";
         }
     }
 }

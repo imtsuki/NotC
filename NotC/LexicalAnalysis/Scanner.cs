@@ -85,7 +85,7 @@ namespace NotC.LexicalAnalysis
             while (length > 0) {
                 if (TokenOperator.Operators.ContainsKey(op.Substring(0, length))) {
                     forward = lexemeBegin + length - 1;
-                    return new TokenOperator(TokenOperator.Operators[op.Substring(0, length)]);
+                    return new TokenOperator(op.Substring(0, length));
                 }
                 length--;
             }
