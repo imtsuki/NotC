@@ -43,29 +43,21 @@ namespace NotC.SyntaxAnalysis
         }
 
         private SyntaxExpression ParseFactorExpression() {
-            ASTExpression result = null;
             switch (CurrentToken.Kind)
             {
                 case TokenKind.OPERATOR:
-                    var left = Match("(");
+                    var left = MatchOperator("(");
                     var expression = ParseExpression();
-                    var right = Match(")");
-                    return new SyntaxParenthesizedExpression((TokenOperator)left, expression, (TokenOperator)right);
-                case TokenKind.INT:
-                    result = new IntNumber((TokenInt)CurrentToken);
-                    Match(TokenKind.INT);
-                    break;
+                    var right = MatchOperator(")");
+                    return new SyntaxParenthesizedExpression(left, expression, right);
                 case TokenKind.IDENTIFIER:
-                    Match(TokenKind.IDENTIFIER);
-                    break;
-                
+                    var identifier = (TokenIdentifier)NextToken();
+                    return new SyntaxIdentifierExpression(identifier);
                 default:
-                    ErrorMessage.Add("Syntax Error");
-                    break;
+                    var number = (TokenInt)Match(TokenKind.INT);
+                    return new SyntaxLiteralExpression(number);
             }
-            return result;
         }
-
 
         private List<Token> Tokens { get; set; } = new List<Token>();
         private Int32 Position = 0;
@@ -77,29 +69,30 @@ namespace NotC.SyntaxAnalysis
             return token;
         }
 
-        private Token Match(object term)
+        private Token Match(TokenKind kind)
         {
-            if (term.GetType().Equals(typeof(KeywordVal)))
-            {
-                if (CurrentToken.Kind == TokenKind.KEYWORD &&
-                    ((TokenKeyword)CurrentToken).Val == (KeywordVal)term)
-                    return NextToken();
-            }
-            else if (term.GetType().Equals(typeof(string)))
-            {
-                if (CurrentToken.Kind == TokenKind.OPERATOR &&
-                    ((TokenOperator)CurrentToken).Val == (string)term)
-                    return NextToken();
-            }
-            else if (term.GetType().Equals(typeof(TokenKind)))
-            {
-                if (CurrentToken.Kind == (TokenKind)term)
-                    return NextToken();
-            }
-            ErrorMessage.Add($"Unexpected {CurrentToken}, Expected {term}");
-            // Since a TokenError token will break the process of generating AST,
-            // further improvement is needed here.
+            if (CurrentToken.Kind == kind)
+                return NextToken();
+            ErrorMessage.Add($"Unexpected {CurrentToken}, Expected {kind}");
             return new TokenError(CurrentToken.Position, CurrentToken.Length);
+        }
+
+        private TokenOperator MatchOperator(string val) {
+            if (CurrentToken.Kind == TokenKind.OPERATOR &&
+                ((TokenOperator)CurrentToken).Val == val) {
+                    return (TokenOperator)CurrentToken;
+                }
+            ErrorMessage.Add($"Unexpected {CurrentToken}, Expected operator '{val}'. ");
+            return new TokenOperator(val, CurrentToken.Position, CurrentToken.Length);
+        }
+
+        private TokenKeyword MatchKeyword(KeywordVal val) {
+            if (CurrentToken.Kind == TokenKind.KEYWORD &&
+                ((TokenKeyword)CurrentToken).Val == val) {
+                    return (TokenKeyword)CurrentToken;
+                }
+            ErrorMessage.Add($"Unexpected {CurrentToken}, Expected keyword '{val}'. ");
+            return new TokenKeyword(val, CurrentToken.Position, CurrentToken.Length);
         }
     }
 }
