@@ -6,10 +6,7 @@ namespace NotC.LexicalAnalysis
 {
     public sealed class TokenOperator : Token
     {
-        public TokenOperator(string val)
-        {
-            this.Val = val;
-        }
+        public TokenOperator(string val, int position, int length) : base(position, length) => Val = val;
         public override TokenKind Kind { get; } = TokenKind.OPERATOR;
 
         public string Val { get; }
@@ -63,9 +60,6 @@ namespace NotC.LexicalAnalysis
             { "}",    OperatorVal.RCURL        }
         };
 
-        public override String ToString()
-        {
-            return $"{this.Kind}: {this.Val}";
-        }
+        public override string ToString() => $"{this.Kind}: {this.Val}";
     }
 }

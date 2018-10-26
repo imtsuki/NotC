@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using NotC.LexicalAnalysis;
 
 namespace NotC.SyntaxAnalysis {
-    public abstract class SyntaxBinaryExpression : SyntaxExpression {
+    public class SyntaxBinaryExpression : SyntaxExpression {
         public SyntaxExpression Left { get; }
         public TokenOperator Operator { get; }
         public SyntaxExpression Right { get; }
@@ -13,7 +13,7 @@ namespace NotC.SyntaxAnalysis {
             Right = right;
         }
 
-        public override IEnumerable<SyntaxNode> GetChildren() {
+        public override IEnumerable<SyntaxNode> Children() {
             yield return Left;
             yield return Operator;
             yield return Right;

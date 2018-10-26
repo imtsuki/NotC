@@ -5,7 +5,7 @@ namespace NotC.LexicalAnalysis
 {
     public sealed class TokenKeyword : Token
     {
-        public TokenKeyword(KeywordVal val) => this.Val = val;
+        public TokenKeyword(KeywordVal val, int position, int length) : base(position, length) => Val = val;
 
         public override TokenKind Kind { get; } = TokenKind.KEYWORD;
 
@@ -47,6 +47,6 @@ namespace NotC.LexicalAnalysis
             { "while",       KeywordVal.WHILE     }
         };
 
-        public override String ToString() => $"{this.Kind}: {this.Val}";
+        public override string ToString() => $"{this.Kind}: {this.Val}";
     }
 }

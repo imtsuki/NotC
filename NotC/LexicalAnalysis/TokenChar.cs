@@ -6,12 +6,11 @@ namespace NotC.LexicalAnalysis
 {
     public sealed class TokenChar : Token
     {
-        public TokenChar(char val) => this.Val = val;
-
+        public TokenChar(char val, int position, int length) : base(position, length) => Val = val;
         public override TokenKind Kind { get; } = TokenKind.CHAR;
 
         public char Val { get; }
 
-        public override String ToString() => $"{this.Kind}: '{this.Val}'";
+        public override string ToString() => $"{this.Kind}: '{this.Val}'";
     }
 }

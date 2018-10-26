@@ -81,16 +81,17 @@ namespace NotC.LexicalAnalysis
                 }
                 length++;
             }
+            int fullLength = length;
             string op = Source.Substring(lexemeBegin, length);
             while (length > 0) {
                 if (TokenOperator.Operators.ContainsKey(op.Substring(0, length))) {
                     forward = lexemeBegin + length - 1;
-                    return new TokenOperator(op.Substring(0, length));
+                    return new TokenOperator(op.Substring(0, length), lexemeBegin, length);
                 }
                 length--;
             }
-            LexErrors.Add($"Cannot Parse Operator {op}. ");
-            return new TokenError();
+            ErrorMessage.Add($"Cannot Parse Operator {op}. ");
+            return new TokenError(lexemeBegin, fullLength);
         }
 
         private Token GetIdentifier()
@@ -107,9 +108,9 @@ namespace NotC.LexicalAnalysis
             }
             string identifier = Source.Substring(lexemeBegin, length);
             if (TokenKeyword.Keywords.ContainsKey(identifier))
-                return new TokenKeyword(val: TokenKeyword.Keywords[identifier]);
+                return new TokenKeyword(TokenKeyword.Keywords[identifier], lexemeBegin, length);
             else
-                return new TokenIdentifier(val: identifier);
+                return new TokenIdentifier(identifier, lexemeBegin, length);
         }
 
         private Token GetNumber()
@@ -118,6 +119,7 @@ namespace NotC.LexicalAnalysis
             StateNumber state = StateNumber.START;
             Int64 number = 0;
             Int32 digit;
+            int length = 0;
             while (true)
             {
                 switch (state)
@@ -142,12 +144,14 @@ namespace NotC.LexicalAnalysis
                         else
                         {
                             Retract();
+                            length--;
                             state = StateNumber.FINISH;
                         }
                         break;
                     case StateNumber.FINISH:
-                        return new TokenInt(val: number);
+                        return new TokenInt(number, lexemeBegin, length);
                 }
+                length++;
             }
         }
 
@@ -160,6 +164,7 @@ namespace NotC.LexicalAnalysis
             string escapeChars = @"abfnrtv'""\";
             string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
             TokenChar result = null;
+            int length = 0;
             while (true)
             {
                 switch (state)
@@ -185,7 +190,7 @@ namespace NotC.LexicalAnalysis
                         
                         break;
                     case StateChar.C:
-                        result = new TokenChar(val: c);
+                        result = new TokenChar(c, lexemeBegin, length + 2);
                         c = Next();
                         if (c == '\'')
                         {
@@ -211,8 +216,10 @@ namespace NotC.LexicalAnalysis
                     case StateChar.FINISH:
                         return result;
                     case StateChar.FAILED:
-                        throw new Exception();
+                        ErrorMessage.Add($"Character Parse failed when meeting '{c}'. ");
+                        return new TokenError(lexemeBegin, length + 1);
                 }
+                length++;
             }
         }
 
@@ -226,13 +233,13 @@ namespace NotC.LexicalAnalysis
                 if (c == '"')
                     break;
                 if (c == '\n') {
-                    LexErrors.Add("Unexpected Line Ending While Parsing String. ");
-                    return new TokenError();
+                    ErrorMessage.Add("Unexpected Line Ending While Parsing String. ");
+                    return new TokenError(lexemeBegin, length + 1);
                 }
                 length++;
             }
             string str = Source.Substring(lexemeBegin + 1, length);
-            return new TokenString(str);
+            return new TokenString(str, lexemeBegin, length + 2);
         }
 
         private void Retract()
@@ -248,7 +255,7 @@ namespace NotC.LexicalAnalysis
 
         public String Source { get; }
 
-        public List<string> LexErrors = new List<string>();
+        public List<string> ErrorMessage = new List<string>();
 
         private Int32 lexemeBegin = 0;
         private Int32 forward = 0;

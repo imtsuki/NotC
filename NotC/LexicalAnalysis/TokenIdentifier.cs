@@ -18,18 +18,12 @@ namespace NotC.LexicalAnalysis
             }
         }
 
-        public TokenIdentifier(String val)
-        {
-            this.Val = val;
-        }
+        public TokenIdentifier(string val, int position, int length) : base(position, length) => Val = val;
 
         public override TokenKind Kind { get; } = TokenKind.IDENTIFIER;
 
-        public String Val { get; }
+        public string Val { get; }
 
-        public override string ToString()
-        {
-            return $"{this.Kind}: [{this.Val}]";
-        }
+        public override string ToString() => $"{this.Kind}: [{this.Val}]";
     }
 }

@@ -5,31 +5,23 @@ using NotC.SyntaxAnalysis;
 
 namespace NotC.LexicalAnalysis
 {
-    public enum TokenKind
-    {
-        NONE,
-        FLOAT,
-        INT,
-        CHAR,
-        STRING,
-        IDENTIFIER,
-        KEYWORD,
-        OPERATOR,
-        EOF,
-        ERROR
-    }
-
     public abstract class Token : SyntaxNode
     {
         public override String ToString()
         {
             return Kind.ToString();
         }
-        int position;
+        public int Position { get; }
+        public int Length { get; }
         public abstract TokenKind Kind { get; }
 
-        public override IEnumerable<SyntaxNode> GetChildren() {
+        public override IEnumerable<SyntaxNode> Children() {
             return Enumerable.Empty<SyntaxNode>();
+        }
+
+        public Token(int position, int length) {
+            Position = position;
+            Length = length;
         }
     }
 }
