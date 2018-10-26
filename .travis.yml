@@ -1,6 +1,8 @@
 language: csharp
 mono: none
 dotnet: 2.1.400
+install:
+  - dotnet restore
 script:
-  - dotnet restore Repl
-  - dotnet build Repl
+  - dotnet build
+  - dotnet test NotC.Tests
