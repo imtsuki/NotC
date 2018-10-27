@@ -20,20 +20,6 @@ namespace NotC
                 if (input == "") {
                     continue;
                 }
-                var scanner = new Scanner(input);
-                var tokens = scanner.Scan();
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                foreach (var token in tokens) {
-                    Console.WriteLine($"{token.ToString()} {token.Position} {token.Length}");
-                }
-                Console.ResetColor();
-                if (scanner.ErrorMessage.Any()) {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    foreach (var message in scanner.ErrorMessage) {
-                        Console.WriteLine($"ERROR: {message}");
-                    }
-                    Console.ResetColor();
-                }
                 var parser = new Parser(input);
                 var result = parser.Parse();
                 if (parser.ErrorMessage.Any()) {
@@ -44,7 +30,7 @@ namespace NotC
                     Console.ResetColor();
                 }
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(result.ToString());
+                Printer.PrintSyntaxTree(result); 
                 Console.ResetColor();
             }
         }

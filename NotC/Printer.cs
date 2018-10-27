@@ -6,10 +6,10 @@ using NotC.SyntaxAnalysis;
 
 namespace NotC {
     public class Printer {
-        public static void PrintSyntaxTree(SyntaxNode root) {
-            Console.WriteLine(root.ToString());
+        public static void PrintSyntaxTree(SyntaxNode root, string indent = "") {
+            Console.WriteLine($"{indent}{root}");
             foreach (var child in root.Children()) {
-                PrintSyntaxTree(child);
+                PrintSyntaxTree(child, indent + "  ");
             }
         }
 

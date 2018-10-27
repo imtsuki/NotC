@@ -35,11 +35,21 @@ namespace NotC.SyntaxAnalysis
         }
 
          private SyntaxExpression ParseExpression() {
-             return ParseBinaryExpression();
+            return ParseBinaryExpression();
         }
 
         private SyntaxExpression ParseBinaryExpression(int parentOperatorPrecedence = 0) {
-            return ParseFactorExpression();
+            SyntaxExpression left;
+            left = ParseFactorExpression();
+            while (true) {
+                var precedence = CurrentToken.GetOperatorPrecedence();
+                if (precedence == 0 || precedence <= parentOperatorPrecedence)
+                    break;
+                var operatorToken = NextToken();
+                var right = ParseBinaryExpression(precedence);
+                left = new SyntaxBinaryExpression(left, operatorToken, right);
+            }
+            return left;
         }
 
         private SyntaxExpression ParseFactorExpression() {
@@ -80,7 +90,7 @@ namespace NotC.SyntaxAnalysis
         private Token MatchOperator(string val) {
             if (CurrentToken.Kind == TokenKind.OPERATOR &&
                 (string)CurrentToken.Val == val) {
-                    return CurrentToken;
+                    return NextToken();
                 }
             ErrorMessage.Add($"Unexpected {CurrentToken}, Expected operator '{val}'. ");
             return Token.GetOperatorToken(val, CurrentToken.Position, CurrentToken.Length);
@@ -89,7 +99,7 @@ namespace NotC.SyntaxAnalysis
         private Token MatchKeyword(KeywordVal val) {
             if (CurrentToken.Kind == TokenKind.KEYWORD &&
                 (KeywordVal)CurrentToken.Val == val) {
-                    return CurrentToken;
+                    return NextToken();
                 }
             ErrorMessage.Add($"Unexpected {CurrentToken}, Expected keyword '{val}'. ");
             return Token.GetKeywordToken(val, CurrentToken.Position, CurrentToken.Length);
