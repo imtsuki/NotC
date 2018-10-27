@@ -4,10 +4,10 @@ using NotC.LexicalAnalysis;
 namespace NotC.SyntaxAnalysis {
     public class SyntaxBinaryExpression : SyntaxExpression {
         public SyntaxExpression Left { get; }
-        public TokenOperator Operator { get; }
+        public Token Operator { get; }
         public SyntaxExpression Right { get; }
 
-        public SyntaxBinaryExpression(SyntaxExpression left, TokenOperator @operator, SyntaxExpression right) {
+        public SyntaxBinaryExpression(SyntaxExpression left, Token @operator, SyntaxExpression right) {
             Left = left;
             Operator = @operator;
             Right = right;

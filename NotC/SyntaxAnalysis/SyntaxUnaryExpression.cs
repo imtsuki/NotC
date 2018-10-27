@@ -3,11 +3,11 @@ using NotC.LexicalAnalysis;
 
 namespace NotC.SyntaxAnalysis {
     public class SyntaxUnaryExpression : SyntaxExpression {
-        public TokenOperator Operator { get; }
+        public Token Operator { get; }
 
         public SyntaxExpression Operand { get; }
 
-        public SyntaxUnaryExpression(TokenOperator @operator, SyntaxExpression operand) {
+        public SyntaxUnaryExpression(Token @operator, SyntaxExpression operand) {
             Operator = @operator;
             Operand = operand;
         }

@@ -35,9 +35,9 @@ namespace NotC.AST {
         {
             Val = val;
         }
-        public IntNumber(TokenInt token)
+        public IntNumber(Token token)
         {
-            Val = token.Val;
+            Val = (Int64)token.Val;
         }
 
         public override string ToString()

@@ -51,10 +51,10 @@ namespace NotC.SyntaxAnalysis
                     var right = MatchOperator(")");
                     return new SyntaxParenthesizedExpression(left, expression, right);
                 case TokenKind.IDENTIFIER:
-                    var identifier = (TokenIdentifier)NextToken();
+                    var identifier = NextToken();
                     return new SyntaxIdentifierExpression(identifier);
                 default:
-                    var number = (TokenInt)Match(TokenKind.INT);
+                    var number = Match(TokenKind.INT);
                     return new SyntaxLiteralExpression(number);
             }
         }
@@ -74,25 +74,25 @@ namespace NotC.SyntaxAnalysis
             if (CurrentToken.Kind == kind)
                 return NextToken();
             ErrorMessage.Add($"Unexpected {CurrentToken}, Expected {kind}");
-            return new TokenError(CurrentToken.Position, CurrentToken.Length);
+            return Token.GetErrorToken(CurrentToken.Position, CurrentToken.Length);
         }
 
-        private TokenOperator MatchOperator(string val) {
+        private Token MatchOperator(string val) {
             if (CurrentToken.Kind == TokenKind.OPERATOR &&
-                ((TokenOperator)CurrentToken).Val == val) {
-                    return (TokenOperator)CurrentToken;
+                (string)CurrentToken.Val == val) {
+                    return CurrentToken;
                 }
             ErrorMessage.Add($"Unexpected {CurrentToken}, Expected operator '{val}'. ");
-            return new TokenOperator(val, CurrentToken.Position, CurrentToken.Length);
+            return Token.GetOperatorToken(val, CurrentToken.Position, CurrentToken.Length);
         }
 
-        private TokenKeyword MatchKeyword(KeywordVal val) {
+        private Token MatchKeyword(KeywordVal val) {
             if (CurrentToken.Kind == TokenKind.KEYWORD &&
-                ((TokenKeyword)CurrentToken).Val == val) {
-                    return (TokenKeyword)CurrentToken;
+                (KeywordVal)CurrentToken.Val == val) {
+                    return CurrentToken;
                 }
             ErrorMessage.Add($"Unexpected {CurrentToken}, Expected keyword '{val}'. ");
-            return new TokenKeyword(val, CurrentToken.Position, CurrentToken.Length);
+            return Token.GetKeywordToken(val, CurrentToken.Position, CurrentToken.Length);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace NotC
                     Console.ResetColor();
                 }
                 var parser = new Parser(input);
-                var result = parser.Expr();
+                var result = parser.Parse();
                 if (parser.ErrorMessage.Any()) {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     foreach (var message in parser.ErrorMessage) {

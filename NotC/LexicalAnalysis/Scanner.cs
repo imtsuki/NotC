@@ -66,7 +66,7 @@ namespace NotC.LexicalAnalysis
                 lexemeBegin = forward + 1;
                 if (lexemeBegin == Source.Length) break;
             }
-            tokens.Add(new TokenEOF());
+            tokens.Add(Token.GetEOFToken());
             return tokens;
         }
 
@@ -84,14 +84,14 @@ namespace NotC.LexicalAnalysis
             int fullLength = length;
             string op = Source.Substring(lexemeBegin, length);
             while (length > 0) {
-                if (TokenOperator.Operators.ContainsKey(op.Substring(0, length))) {
+                if (Token.Operators.ContainsKey(op.Substring(0, length))) {
                     forward = lexemeBegin + length - 1;
-                    return new TokenOperator(op.Substring(0, length), lexemeBegin, length);
+                    return Token.GetOperatorToken(op.Substring(0, length), lexemeBegin, length);
                 }
                 length--;
             }
             ErrorMessage.Add($"Cannot Parse Operator {op}. ");
-            return new TokenError(lexemeBegin, fullLength);
+            return Token.GetErrorToken(lexemeBegin, fullLength);
         }
 
         private Token GetIdentifier()
@@ -107,10 +107,10 @@ namespace NotC.LexicalAnalysis
                 length++;
             }
             string identifier = Source.Substring(lexemeBegin, length);
-            if (TokenKeyword.Keywords.ContainsKey(identifier))
-                return new TokenKeyword(TokenKeyword.Keywords[identifier], lexemeBegin, length);
+            if (Token.Keywords.ContainsKey(identifier))
+                return Token.GetKeywordToken(Token.Keywords[identifier], lexemeBegin, length);
             else
-                return new TokenIdentifier(identifier, lexemeBegin, length);
+                return Token.GetIdentifierToken(identifier, lexemeBegin, length);
         }
 
         private Token GetNumber()
@@ -149,7 +149,7 @@ namespace NotC.LexicalAnalysis
                         }
                         break;
                     case StateNumber.FINISH:
-                        return new TokenInt(number, lexemeBegin, length);
+                        return Token.GetIntToken(number, lexemeBegin, length);
                 }
                 length++;
             }
@@ -163,7 +163,7 @@ namespace NotC.LexicalAnalysis
             var invalidChars = new HashSet<Char>("\'\n");
             string escapeChars = @"abfnrtv'""\";
             string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
-            TokenChar result = null;
+            Token result = null;
             int length = 0;
             while (true)
             {
@@ -190,7 +190,7 @@ namespace NotC.LexicalAnalysis
                         
                         break;
                     case StateChar.C:
-                        result = new TokenChar(c, lexemeBegin, length + 2);
+                        result = Token.GetCharToken(c, lexemeBegin, length + 2);
                         c = Next();
                         if (c == '\'')
                         {
@@ -217,7 +217,7 @@ namespace NotC.LexicalAnalysis
                         return result;
                     case StateChar.FAILED:
                         ErrorMessage.Add($"Character Parse failed when meeting '{c}'. ");
-                        return new TokenError(lexemeBegin, length + 1);
+                        return Token.GetErrorToken(lexemeBegin, length + 1);
                 }
                 length++;
             }
@@ -234,12 +234,12 @@ namespace NotC.LexicalAnalysis
                     break;
                 if (c == '\n') {
                     ErrorMessage.Add("Unexpected Line Ending While Parsing String. ");
-                    return new TokenError(lexemeBegin, length + 1);
+                    return Token.GetErrorToken(lexemeBegin, length + 1);
                 }
                 length++;
             }
             string str = Source.Substring(lexemeBegin + 1, length);
-            return new TokenString(str, lexemeBegin, length + 2);
+            return Token.GetStringToken(str, lexemeBegin, length + 2);
         }
 
         private void Retract()

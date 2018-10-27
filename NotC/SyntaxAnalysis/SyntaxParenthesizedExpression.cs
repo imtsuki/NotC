@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using NotC.LexicalAnalysis;
 namespace NotC.SyntaxAnalysis {
     public sealed class SyntaxParenthesizedExpression : SyntaxExpression {
-        public SyntaxParenthesizedExpression(TokenOperator left, SyntaxExpression expression, TokenOperator right) {
+        public SyntaxParenthesizedExpression(Token left, SyntaxExpression expression, Token right) {
             LeftParenthesizedToken = left;
             Expression = expression;
             RightParenthesizedToken = right;
         }
 
-        public TokenOperator LeftParenthesizedToken { get; }
+        public Token LeftParenthesizedToken { get; }
         public SyntaxExpression Expression { get; }
-        public TokenOperator RightParenthesizedToken { get; }
+        public Token RightParenthesizedToken { get; }
 
         public override IEnumerable<SyntaxNode> Children() {
             yield return LeftParenthesizedToken;
