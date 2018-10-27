@@ -1,4 +1,4 @@
-﻿<expression> ->
+<expression> ->
 	 assignment_expression
 	|expression ',' assignment_expression
 Exp -> Exp ASSIGNOP Exp {Generate Node}

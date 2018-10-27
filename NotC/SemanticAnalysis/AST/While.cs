@@ -1,35 +1,22 @@
-﻿// ***********************************************************************
-// Assembly         : C
-// Author           : Jason Qiu
-// Created          : 03-21-2018
-//
-// Last Modified By : Jason Qiu
-// Last Modified On : 03-21-2018
-// ***********************************************************************
-// <copyright file="While.cs" company="C">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NotC.AST
 {
-    class While : Statement
+    class While : ASTStatement
     {
         /// <summary>
         /// Gets or sets the condition.
         /// </summary>
         /// <value>The condition.</value>
-        public Expression Condition { get; set; }
+        public ASTExpression Condition { get; set; }
 
         /// <summary>
         /// Gets or sets the body.
         /// </summary>
         /// <value>The body.</value>
-        public Statement Body { get; set; }
+        public ASTStatement Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="While"/> class with structure like:
@@ -38,7 +25,7 @@ namespace NotC.AST
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="body">The body.</param>
-        public While(Expression condition, Statement body)
+        public While(ASTExpression condition, ASTStatement body)
         {
             Condition = condition;
             Body = body;

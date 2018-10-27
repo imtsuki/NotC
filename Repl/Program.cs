@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using NotC.Tokenizer;
+using System.Linq;
+using NotC.LexicalAnalysis;
+using NotC.SyntaxAnalysis;
 using NotC.AST;
 namespace NotC
 {
@@ -8,27 +10,29 @@ namespace NotC
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("-------Viva la Vida!-------");
-            //Test Tokenizer
-            String sourceCode = System.IO.File.ReadAllText("../TestCode/expr1.notc");
-            Scanner scanner = new Scanner(sourceCode);
-            IList<Token> tokens = scanner.Lex();
-            Console.WriteLine("-----------Source----------");
-            Console.WriteLine();
-            Console.WriteLine(sourceCode);
-            Console.WriteLine("-------End of Source-------");
-            Console.WriteLine("-----------Tokens----------");
-            Console.WriteLine();
-            foreach (var item in tokens)
+            while (true)
             {
-                Console.WriteLine(item.ToString());
+                Console.Write("> ");
+                String input = Console.ReadLine();
+                if (input == ":q") {
+                    break;
+                }
+                if (input == "") {
+                    continue;
+                }
+                var parser = new Parser(input);
+                var result = parser.Parse();
+                if (parser.ErrorMessage.Any()) {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    foreach (var message in parser.ErrorMessage) {
+                        Console.WriteLine($"ERROR: {message}");
+                    }
+                    Console.ResetColor();
+                }
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Printer.PrintSyntaxTree(result); 
+                Console.ResetColor();
             }
-            Console.WriteLine();
-            Console.WriteLine("-------End of Tokens-------");
-            Console.WriteLine("-------Viva la Vida!-------");
-            var parser = new Parser.CParser(tokens);
-            var a = parser.Parse();
-            Console.WriteLine(a.ToString());
         }
     }
 }
