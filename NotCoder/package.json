@@ -1,0 +1,32 @@
+{
+  "name": "notcoder",
+  "version": "1.0.0",
+  "description": "NotCoder is not a coder.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron -r babel-register .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "imtsuki",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "electron": "^3.0.6",
+    "electron-reload": "^1.2.5",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  },
+  "dependencies": {
+    "draft-js": "^0.10.5",
+    "material-ui": "^0.20.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "request-promise": "^4.2.2"
+  }
+}
