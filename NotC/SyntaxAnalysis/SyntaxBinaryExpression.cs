@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using NotC.LexicalAnalysis;
 
 namespace NotC.SyntaxAnalysis {
-    public class SyntaxBinaryExpression : SyntaxExpression {
+    public sealed class SyntaxBinaryExpression : SyntaxExpression {
         public SyntaxExpression Left { get; }
         public Token Operator { get; }
         public SyntaxExpression Right { get; }

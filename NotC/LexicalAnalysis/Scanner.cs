@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NotC.LexicalAnalysis
 {
-    public class Scanner
+    public sealed class Scanner
     {
         public enum StateNumber
         {

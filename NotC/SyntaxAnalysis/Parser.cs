@@ -6,7 +6,7 @@ using NotC.AST;
 
 namespace NotC.SyntaxAnalysis
 {
-    public class Parser
+    public sealed class Parser
     {
         public List<string> ErrorMessage = new List<string>();
 

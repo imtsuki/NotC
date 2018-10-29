@@ -5,7 +5,7 @@ using NotC.SyntaxAnalysis;
 
 namespace NotC.LexicalAnalysis
 {
-    public class Token : SyntaxNode
+    public sealed class Token : SyntaxNode
     {
         public int Position { get; }
         public int Length { get; }

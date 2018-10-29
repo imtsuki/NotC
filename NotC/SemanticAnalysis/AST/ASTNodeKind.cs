@@ -1,7 +1,7 @@
 using System;
 
 namespace NotC.AST {
-    enum ASTNodeKind {
+    public enum ASTNodeKind {
         BinaryExpression,
         UnaryExpression
     }
