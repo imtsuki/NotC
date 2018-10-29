@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using NotC.SyntaxAnalysis;
-using NotC.LexicalAnalysis;
 
-namespace NotC.AST {
+namespace NotC.AST
+{
     public abstract class ASTExpression : ASTNode
     {
-        public Type Type;
+        public abstract Type Type { get; }
     }
 }

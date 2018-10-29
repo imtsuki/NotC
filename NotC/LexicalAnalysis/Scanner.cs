@@ -1,22 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace NotC.LexicalAnalysis
-{
-    public sealed class Scanner
-    {
-        public enum StateNumber
-        {
+namespace NotC.LexicalAnalysis {
+    public sealed class Scanner {
+        public enum StateNumber {
             START,
             FINISH,
             FAILED,
             D,
         }
 
-        public enum StateChar
-        {
+        public enum StateChar {
             START,
             FINISH,
             FAILED,
@@ -30,20 +25,17 @@ namespace NotC.LexicalAnalysis
             SXHH,
         }
 
-        public Scanner(String source)
-        {
+        public Scanner(String source) {
             this.Source = source;
             if (Source.Last() != '\n')
                 Source += "\n";
 
         }
 
-        public IEnumerable<Token> Scan()
-        {
+        public IEnumerable<Token> Scan() {
             var tokens = new List<Token>();
 
-            while (true)
-            {
+            while (true) {
                 while (lexemeBegin < Source.Length && Char.IsWhiteSpace(Source[lexemeBegin])) lexemeBegin++;
                 if (lexemeBegin == Source.Length) break;
                 forward = lexemeBegin - 1;
@@ -70,8 +62,7 @@ namespace NotC.LexicalAnalysis
             return tokens;
         }
 
-        private Token GetOperator()
-        {
+        private Token GetOperator() {
             int length = 0;
             while (true) {
                 char c = Next();
@@ -94,11 +85,9 @@ namespace NotC.LexicalAnalysis
             return Token.GetErrorToken(lexemeBegin, fullLength);
         }
 
-        private Token GetIdentifier()
-        {
+        private Token GetIdentifier() {
             int length = 0;
-            while(true)
-            {
+            while(true) {
                 Char c = Next();
                 if (Char.IsPunctuation(c) || Char.IsSymbol(c) || Char.IsWhiteSpace(c)) {
                     Retract();
@@ -113,17 +102,14 @@ namespace NotC.LexicalAnalysis
                 return Token.GetIdentifierToken(identifier, lexemeBegin, length);
         }
 
-        private Token GetNumber()
-        {
+        private Token GetNumber() {
             Char c;
             StateNumber state = StateNumber.START;
             Int64 number = 0;
             Int32 digit;
             int length = 0;
-            while (true)
-            {
-                switch (state)
-                {
+            while (true) {
+                switch (state) {
                     case StateNumber.START:
                         c = Next();
                         digit = Convert.ToInt32(c) - 0x30;
@@ -133,16 +119,13 @@ namespace NotC.LexicalAnalysis
                         break;
                     case StateNumber.D:
                         c = Next();
-                        if (Char.IsDigit(c))
-                        {
+                        if (Char.IsDigit(c)) {
                             digit = Convert.ToInt32(c) - 0x30;
                             
                             number *= 10;
                             number += digit;
                             state = StateNumber.D;
-                        }
-                        else
-                        {
+                        } else {
                             Retract();
                             length--;
                             state = StateNumber.FINISH;
@@ -155,8 +138,7 @@ namespace NotC.LexicalAnalysis
             }
         }
 
-        private Token GetChar()
-        {
+        private Token GetChar() {
             StateChar state = StateChar.START;
             Char c = '\0';
             Next();
@@ -165,51 +147,38 @@ namespace NotC.LexicalAnalysis
             string correspondingEscapeChars = "\a\b\f\n\r\t\v\'\"\\";
             Token result = null;
             int length = 0;
-            while (true)
-            {
-                switch (state)
-                {
+            while (true) {
+                switch (state) {
                     case StateChar.START:
                         c = Next();
-                        switch (c)
-                        {
+                        switch (c) {
                             case '\\':
                                 state = StateChar.S;
                                 break;
                             default:
-                                if (invalidChars.Contains(c))
-                                {
+                                if (invalidChars.Contains(c)) {
                                     state = StateChar.FAILED;
-                                }
-                                else
-                                {
+                                } else {
                                     state = StateChar.C;
                                 }
                                 break;
                         }
-                        
                         break;
                     case StateChar.C:
                         result = Token.GetCharToken(c, lexemeBegin, length + 2);
                         c = Next();
-                        if (c == '\'')
-                        {
+                        if (c == '\'') {
                             state = StateChar.FINISH;
-                        }
-                        else
-                        {
+                        } else {
                             state = StateChar.FAILED;
                         }
                         break;
                     case StateChar.S:
                         c = Next();
-                        if (escapeChars.Contains(c))
-                        {
+                        if (escapeChars.Contains(c)) {
                             c = correspondingEscapeChars[escapeChars.IndexOf(c)];
                             state = StateChar.C;
-                        }
-                        else
-                        {
+                        } else {
                             state = StateChar.FAILED;
                         }
                         break;
@@ -223,12 +192,10 @@ namespace NotC.LexicalAnalysis
             }
         }
 
-        private Token GetString()
-        {
+        private Token GetString() {
             int length = 0;
             Next();
-            while(true)
-            {
+            while(true) {
                 Char c = Next();
                 if (c == '"')
                     break;
@@ -242,13 +209,11 @@ namespace NotC.LexicalAnalysis
             return Token.GetStringToken(str, lexemeBegin, length + 2);
         }
 
-        private void Retract()
-        {
+        private void Retract() {
             forward--;
         }
 
-        private Char Next()
-        {
+        private Char Next() {
             forward++;
             return Source[forward];
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NotC.LexicalAnalysis;
+
 namespace NotC.SyntaxAnalysis {
     public sealed class SyntaxLiteralExpression : SyntaxExpression {
         public SyntaxLiteralExpression(Token number) {

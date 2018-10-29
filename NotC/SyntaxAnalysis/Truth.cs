@@ -1,4 +1,5 @@
 using NotC.LexicalAnalysis;
+
 namespace NotC.SyntaxAnalysis {
     internal static class Truth {
         public static int GetOperatorPrecedence(this Token operatorToken) {

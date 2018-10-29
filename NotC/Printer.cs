@@ -1,10 +1,8 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using NotC.LexicalAnalysis;
 using NotC.SyntaxAnalysis;
 
-namespace NotC {
+namespace NotC
+{
     public sealed class Printer {
         public static void PrintSyntaxTree(SyntaxNode root, string indent = "") {
             Console.WriteLine($"{indent}{root}");

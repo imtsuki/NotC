@@ -1,7 +1,5 @@
-namespace NotC.LexicalAnalysis
-{
-    public enum OperatorVal
-    {
+namespace NotC.LexicalAnalysis {
+    public enum OperatorVal {
         // Represents '['. 
         LBRACKET,
         // Represents ']'. 
