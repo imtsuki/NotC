@@ -8,8 +8,9 @@ namespace NotC.AST
         public ASTExpression Left { get; }
         public ASTBinaryOperator Operator { get; }
         public ASTExpression Right { get; }
-        public ASTBinaryExpression(ASTExpression left, ASTExpression right) {
+        public ASTBinaryExpression(ASTExpression left, ASTBinaryOperator @operator, ASTExpression right) {
             Left = left;
+            Operator = @Operator;
             Right = right;
         }
     }

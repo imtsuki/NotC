@@ -5,5 +5,6 @@ namespace NotC.AST
         BinaryExpression,
         UnaryExpression,
         BinaryOperator,
+        UnaryOperator,
     }
 }
