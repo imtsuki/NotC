@@ -1,7 +1,5 @@
-namespace NotC.LexicalAnalysis
-{
-    public enum TokenKind
-    {
+namespace NotC.LexicalAnalysis {
+    public enum TokenKind {
         NONE,
         FLOAT,
         INT,

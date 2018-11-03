@@ -1,7 +1,5 @@
-namespace NotC.LexicalAnalysis
-{
-    public enum KeywordVal
-    {
+namespace NotC.LexicalAnalysis {
+    public enum KeywordVal {
         AUTO,
         DOUBLE,
         INT,

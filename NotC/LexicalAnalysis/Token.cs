@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using NotC.SyntaxAnalysis;
 
-namespace NotC.LexicalAnalysis
-{
-    public class Token : SyntaxNode
-    {
+namespace NotC.LexicalAnalysis {
+    public sealed class Token : SyntaxNode {
         public int Position { get; }
         public int Length { get; }
         public TokenKind Kind { get; }
@@ -74,8 +72,7 @@ namespace NotC.LexicalAnalysis
             var token = new Token(TokenKind.EOF, null, position, length);
             return token;
         }
-        public static Dictionary<String, OperatorVal> Operators { get; } = new Dictionary<string, OperatorVal>()
-        {
+        public static Dictionary<String, OperatorVal> Operators { get; } = new Dictionary<string, OperatorVal>() {
             { "[",    OperatorVal.LBRACKET     },
             { "]",    OperatorVal.RBRACKET     },
             { "(",    OperatorVal.LPAREN       },
@@ -123,8 +120,7 @@ namespace NotC.LexicalAnalysis
             { "}",    OperatorVal.RCURL        }
         };
 
-        public static Dictionary<String, KeywordVal> Keywords { get; } = new Dictionary<string, KeywordVal>()
-        {
+        public static Dictionary<String, KeywordVal> Keywords { get; } = new Dictionary<string, KeywordVal>() {
             { "auto",        KeywordVal.AUTO      },
             { "double",      KeywordVal.DOUBLE    },
             { "int",         KeywordVal.INT       },

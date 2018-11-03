@@ -2,12 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NotC.LexicalAnalysis;
-using NotC.AST;
 
-namespace NotC.SyntaxAnalysis
-{
-    public class Parser
-    {
+namespace NotC.SyntaxAnalysis {
+    public sealed class Parser {
         public List<string> ErrorMessage = new List<string>();
 
         public Parser(string source) {
@@ -28,8 +25,7 @@ namespace NotC.SyntaxAnalysis
             return Tokens[Position + offset];
         }
 
-        public SyntaxNode Parse()
-        {
+        public SyntaxNode Parse() {
             var expression = ParseExpression();
             return expression;
         }
@@ -72,15 +68,13 @@ namespace NotC.SyntaxAnalysis
         private List<Token> Tokens { get; set; } = new List<Token>();
         private Int32 Position = 0;
         private Token CurrentToken => Peek(0);
-        private Token NextToken()
-        {
+        private Token NextToken() {
             var token = CurrentToken;
             Position++;
             return token;
         }
 
-        private Token Match(TokenKind kind)
-        {
+        private Token Match(TokenKind kind) {
             if (CurrentToken.Kind == kind)
                 return NextToken();
             ErrorMessage.Add($"Unexpected {CurrentToken}, Expected {kind}");

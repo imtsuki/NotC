@@ -1,8 +1,10 @@
-using System;
-
-namespace NotC.AST {
-    enum ASTNodeKind {
+namespace NotC.AST
+{
+    public enum ASTNodeKind {
+        LiteralExpression,
         BinaryExpression,
-        UnaryExpression
+        UnaryExpression,
+        BinaryOperator,
+        UnaryOperator,
     }
 }

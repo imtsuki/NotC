@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using NotC.LexicalAnalysis;
 
 namespace NotC.SyntaxAnalysis {
-    public class SyntaxUnaryExpression : SyntaxExpression {
+    public sealed class SyntaxUnaryExpression : SyntaxExpression {
         public Token Operator { get; }
 
         public SyntaxExpression Operand { get; }
